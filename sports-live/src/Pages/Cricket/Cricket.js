@@ -5,6 +5,11 @@ import { Parallax } from "react-parallax";
 import Avatar from "@mui/material/Avatar";
 import { Col, Container, Row } from "react-bootstrap";
 
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid'
+
 const insideStyles = {
   background: "black",
   padding: 20,
@@ -16,6 +21,17 @@ const insideStyles = {
   transform: "translate(-50%,-50%)",
 };
 
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: 'black',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: 'white',
+  fontSize:'20px'
+}));
+
+
 function Cricket() {
   const parallaxContainer = () => (
     <Parallax
@@ -24,7 +40,7 @@ function Cricket() {
       bgImageAlt="CricInfo Img"
       strength={-200}
     >
-      <div style={{ height: "600px" }}>
+      <div style={{ height: "800px"}}>
         <div style={insideStyles}>Cricket</div>
       </div>
     </Parallax>
@@ -42,36 +58,59 @@ function Cricket() {
     >
       <div
         style={{
-          height: "400px",
-          background: "rgba(214,180,12,0.9)",
+          height: "300px",
+          background: "rgba(214,180,10,0.9)",
         }}
       >
-        <Container>
-          <Row>
-            <Col>
+
+        
+        
+        <Box sx={{ flexGrow: 1 }} display="flex" justifyContent="center" alignItems="center" minHeight="40vh">
+          
+          
+          
+          <Grid container spacing={2} align="center">
+
+            <Grid item xs={6} md={12}>
+            <h3>Featured match</h3>
+            </Grid>
+
+            <Grid item xs={6} md={4}>
               <Avatar
                 alt="Remy Sharp"
-                src="https://seeklogo.com/images/I/Indian_Flag-logo-19B702FA68-seeklogo.com.png"
+                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
                 sx={{ width: 100, height: 100 }}
-              />
-            </Col>
-            <Col>score</Col>
-            <Col>
+              />India
+            </Grid>
+
+            <Grid item xs={6} md={4}>
+            <h4 style={{marginBottom:'5px'}}> Date : 25/8/2022</h4>
+            <Item>  
+              IND : 350 / 15 (50) <br />
+              RSA : 349 / 10 (50)
+              </Item>
+            <h4 style={{marginTop:'5px'}}>Indian won by 10 wickets </h4>
+            </Grid>
+
+            <Grid item xs={6} md={4}>
               <Avatar
                 alt="Remy Sharp"
-                src="https://seeklogo.com/images/I/Indian_Flag-logo-19B702FA68-seeklogo.com.png"
+                src="http://geo5.net/imagens/Bandeira-da-Africa-do-Sul.png"
                 sx={{ width: 100, height: 100 }}
               />
-            </Col>
-          </Row>
-        </Container>
+              India
+            </Grid>
+          </Grid>
+        </Box>
+
+
       </div>
     </Parallax>
   );
 
   return (
     <>
-    {/* K */}
+
       <CricketSubNavbar></CricketSubNavbar>
       <Outlet />
       {parallaxContainer()}
