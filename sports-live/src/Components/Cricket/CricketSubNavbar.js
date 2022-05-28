@@ -12,6 +12,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { Link } from "react-router-dom";
 
+import { COLORS } from "../../Constants/Theme";
+
 const pages = ["LiveScore", "Rankings", "Series", "Gallery", "News", "Teams"];
 
 const CricketSubNavbar = () => {
@@ -26,7 +28,7 @@ const CricketSubNavbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: COLORS.colorSecondary }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

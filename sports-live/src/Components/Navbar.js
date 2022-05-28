@@ -13,6 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { Link } from "react-router-dom";
 
+import { COLORS } from "../Constants/Theme";
+
 const pages = ["Home", "Cricket", "Football"];
 
 const Navbar = () => {
@@ -27,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: COLORS.colorPrimary }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SportsIcon
