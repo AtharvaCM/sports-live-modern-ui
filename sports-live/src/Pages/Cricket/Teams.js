@@ -45,8 +45,8 @@ function Teams() {
   const TeamList = () => (
     <>
 
-      <div>
-        <Box sx={{ width: "100%",marginBottom:'50px'}}>
+      <div style={{backgroundColor:'#FFFFFF'}}>
+        <Box sx={{ width: "100%",marginBottom:'50px'}} >
           <Grid
             columnSpacing={{ sm: 2, md: 3 }}
             spacing={6}
@@ -55,7 +55,7 @@ function Teams() {
            
           >
             <Grid item xs={12} md={12}>
-              <h2 style={{ color: COLORS.colorDark }}>Teams</h2>
+              <h2 style={{ color: COLORS.colorDark,marginTop:'100px'}}>Teams</h2>
             </Grid>
 
             <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item" >
@@ -64,7 +64,7 @@ function Teams() {
                 src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
                 sx={{ width: 80, height: 80}}
               />
-              <span style={{marginLeft:'15px',fontWeight:'bold'}}>India</span>
+              <span style={{fontWeight:'bold'}}>India</span>
             </Grid>
 
             <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
@@ -73,7 +73,7 @@ function Teams() {
                 src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
                 sx={{ width: 80, height: 80 }}
               />
-              <span style={{marginLeft:'15px',fontWeight:'bold'}}>India</span>
+              <span style={{fontWeight:'bold'}}>India</span>
             </Grid>
 
             <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
@@ -164,10 +164,10 @@ function Teams() {
 
 
   return (
-    <>
+    <div style={{backgroundColor:'#FFFFFF'}}>
       {parallaxContainer()}
       <Container>{TeamList()}</Container>
-    </>
+    </div>
   );
 }
 
