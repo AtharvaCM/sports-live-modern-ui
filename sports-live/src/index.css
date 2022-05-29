@@ -44,3 +44,8 @@ code {
   box-shadow: -1px 10px 29px 0px rgba(0, 0, 0, 0.8);
   transform: scale(1.05);
 }
+
+/* Gallery Page */
+.galley-img-list {
+  height: calc(100vh - 150px);
+}
