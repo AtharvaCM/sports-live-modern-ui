@@ -4,11 +4,12 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import ListSubheader from "@mui/material/ListSubheader";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
 
 import axios from "axios";
 
+import { COLORS } from "../../Constants/Theme";
+
+// import Container from "@mui/material/Container";
 import { Container } from "react-bootstrap";
 
 const URL =
@@ -28,13 +29,18 @@ function Gallery() {
 
   const imageList = () => (
     <ImageList
-      sx={{ width: "100vw", marginTop: 0 }}
+      sx={{ mt: 0, mx: 0, px: 0, width: "100vw" }}
       className="galley-img-list"
     >
-      <ImageListItem key="Subheader" cols={2}>
+      <ImageListItem key="Subheader" cols={6}>
         <ListSubheader
           component="div"
-          style={{ textAlign: "center", fontSize: 20 }}
+          sx={{
+            textAlign: "center",
+            fontSize: "3rem",
+            color: COLORS.colorDark,
+            py: 2,
+          }}
         >
           Gallery
         </ListSubheader>
@@ -49,20 +55,16 @@ function Gallery() {
           />
           <ImageListItemBar
             title={item.alt_description}
-            subtitle={item.user.name}
-            actionIcon={
-              <IconButton
-                sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                aria-label={`info about ${item.title}`}
-              >
-                <InfoIcon />
-              </IconButton>
-            }
+            subtitle={`@${item.user.name}`}
           />
         </ImageListItem>
       ))}
     </ImageList>
   );
+
+  // const imageList = () => (
+
+  // )
 
   return <>{images == null ? null : <Container>{imageList()}</Container>}</>;
 }
