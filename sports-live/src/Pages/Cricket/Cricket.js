@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import CricketSubNavbar from "../../Components/Cricket/CricketSubNavbar";
-import { COLORS } from "../../Constants/Theme";
+
 import { Parallax } from "react-parallax";
 import Avatar from "@mui/material/Avatar";
 import { Container } from "react-bootstrap";
@@ -15,6 +14,12 @@ import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
+import { CardActionArea } from "@mui/material";
+
+import CricketSubNavbar from "../../Components/Cricket/CricketSubNavbar";
+import { COLORS } from "../../Constants/Theme";
+import NewsAPI from "../../API/Cricket/NewsAPI";
 
 const insideStyles = {
   padding: 20,
@@ -44,7 +49,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Cricket() {
   const location = useLocation();
-
+  const [newsArticles, setNewsArticles] = useState(null);
   const [displayInfo, setDisplayInfo] = useState(true);
 
   useEffect(() => {
@@ -52,6 +57,12 @@ function Cricket() {
     location.pathname === "/Cricket"
       ? setDisplayInfo(true)
       : setDisplayInfo(false);
+    // Call the news API
+    NewsAPI()
+      .then((data) => {
+        setNewsArticles(data.articles);
+      })
+      .catch((err) => console.log(err));
   }, [location]);
 
   const parallaxContainer = () => (
@@ -257,80 +268,61 @@ function Cricket() {
             alignItems: "center",
           }}
         >
-          <Box sx={{ width: "100%", mb: 5 }}>
-            <Grid
-              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-              align="center"
-              container
-            >
-              <Grid item xs={12} md={12}>
-                <h2 style={{ color: COLORS.colorLight }}>Latest News</h2>
+          {newsArticles == null ? null : (
+            <Box sx={{ width: "100%", mb: 5 }}>
+              <Grid
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                align="center"
+                container
+              >
+                <Grid item xs={12} md={12}>
+                  <h2 style={{ color: COLORS.colorLight }}>Latest News</h2>
+                </Grid>
+                {newsArticles.slice(0, 3).map((newsArticle, index) => (
+                  <Grid item xs={4} key={index} sx={{ mb: 5 }}>
+                    <Card
+                      sx={{
+                        maxWidth: 355,
+                        height: 500,
+                        backgroundColor: COLORS.colorLight,
+                      }}
+                    >
+                      <Tooltip title="Open in a new page" placement="top">
+                        <CardActionArea
+                          component="a"
+                          href={newsArticle.url}
+                          target="_blank"
+                        >
+                          <div className="news-card">
+                            <CardMedia
+                              component="img"
+                              height="250"
+                              image={newsArticle.urlToImage}
+                              alt="news"
+                              className="news-card-img"
+                            />
+                          </div>
+                          <CardContent>
+                            <Typography
+                              gutterBottom
+                              variant="h6"
+                              component="div"
+                              color={COLORS.colorDark}
+                            >
+                              {newsArticle.title}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {newsArticle.description}
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Tooltip>
+                    </Card>
+                  </Grid>
+                ))}
               </Grid>
-
-              <Grid item xs={4}>
-                <Card sx={{ maxWidth: 345, minHeight: 400 }}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      Lizard
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Lizards are a widespread group of squamate reptiles, with
-                      over 6,000 species, ranging across all continents except
-                      Antarctica
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-
-              <Grid item xs={4}>
-                <Card sx={{ maxWidth: 345, minHeight: 400 }}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      Lizard
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Lizards are a widespread group of squamate reptiles, with
-                      over 6,000 species, ranging across all continents except
-                      Antarctica
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-
-              <Grid item xs={4}>
-                <Card sx={{ maxWidth: 345, minHeight: 400 }}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      Lizard
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Lizards are a widespread group of squamate reptiles, with
-                      over 6,000 species, ranging across all continents except
-                      Antarctica
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-          </Box>
+            </Box>
+          )}
         </div>
       </Parallax>
     </>
