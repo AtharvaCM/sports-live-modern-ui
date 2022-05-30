@@ -44,13 +44,16 @@ function News() {
         </Grid>
 
         <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345, minHeight: 400 }}>
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-              alt="green iguana"
-            />
+          <Card sx={{ maxWidth: 345, height: 400 }}>
+            <div className="news-card">
+              <CardMedia
+                component="img"
+                height="250"
+                image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                alt="green iguana"
+                className="news-card-img"
+              />
+            </div>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Lizard
@@ -64,13 +67,16 @@ function News() {
         </Grid>
 
         <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345, minHeight: 400 }}>
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-              alt="green iguana"
-            />
+          <Card sx={{ maxWidth: 345, height: 400 }}>
+            <div className="news-card">
+              <CardMedia
+                component="img"
+                height="250"
+                image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                alt="green iguana"
+                className="news-card-img"
+              />
+            </div>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Lizard
@@ -84,13 +90,16 @@ function News() {
         </Grid>
 
         <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345, minHeight: 400 }}>
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-              alt="green iguana"
-            />
+          <Card sx={{ maxWidth: 345, height: 400 }}>
+            <div className="news-card">
+              <CardMedia
+                component="img"
+                height="250"
+                image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                alt="green iguana"
+                className="news-card-img"
+              />
+            </div>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Lizard

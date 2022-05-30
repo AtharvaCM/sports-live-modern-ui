@@ -50,19 +50,30 @@ code {
   height: calc(100vh - 150px);
 }
 
-
 /* cricket teams page */
 
-.teams-grid-item{
- 
+.teams-grid-item {
   border-radius: 2px;
   transition: all 0.25s linear;
   cursor: pointer;
-  
-  
 }
 
-.teams-grid-item:hover{
-  
+.teams-grid-item:hover {
   transform: scale(1.08);
+}
+
+/* News Page */
+.news-card {
+  overflow: hidden;
+}
+
+.news-card-img {
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+.news-card-img:hover,
+.news-card-img:focus {
+  transform: scale(1.25);
 }
