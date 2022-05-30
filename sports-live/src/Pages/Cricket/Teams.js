@@ -1,173 +1,131 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Parallax } from "react-parallax";
-import { COLORS } from "../../Constants/Theme";
+
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
+import Card from "@mui/material/Card";
+import { CardActionArea } from "@mui/material";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 
+import { Link, Outlet, useLocation } from "react-router-dom";
+
+import { COLORS } from "../../Constants/Theme";
+import TeamsListAPI from "../../API/Cricket/TeamsListAPI";
+
 const insideStyles = {
-  background: "black",
   padding: 20,
   position: "absolute",
-  top: "40%",
-  left: "20%",
-  fontSize: "2rem",
+  top: "50%",
+  left: "50%",
+  fontSize: "4rem",
   color: "white",
   transform: "translate(-50%,-50%)",
 };
 
-
-const verticalAlignStyle = {
-  display: "block",
-  alignItems: "center",
-  justifyContent: "center",
-  padding:'0px',
-  marginTop:'40px'
-};
-
-
 function Teams() {
+  const location = useLocation();
+  const [teams, setTeams] = useState(null);
+  const [displayTeams, setDisplayTeams] = useState(true);
+
+  useEffect(() => {
+    // Check the path
+    location.pathname === "/Cricket/Teams"
+      ? setDisplayTeams(true)
+      : setDisplayTeams(false);
+    // call the TeamsList API
+    TeamsListAPI()
+      .then((response) => {
+        setTeams(response.teams);
+      })
+      .catch((err) => console.log(err));
+  }, [location]);
 
   const parallaxContainer = () => (
     <Parallax
       blur={{ min: -15, max: 10 }}
-      bgImage={require("../../Assets/Images/Cricket/cricInfoPage.jpg")}
+      bgImage={require("../../Assets/Images/Cricket/cricketTeamsGroupPhoto.jpg")}
       bgImageAlt="CricInfo Img"
       strength={-200}
     >
-      <div style={{ height: "800px" }}>
-        <div style={insideStyles}><h2>Meet the Teams</h2></div>
+      <div
+        style={{
+          height: "800px",
+          background: "rgba(0,0,0,0.3)",
+        }}
+      >
+        <div style={insideStyles}>Teams</div>
       </div>
     </Parallax>
-  )
+  );
 
   const TeamList = () => (
-    <>
-
-      <div style={{backgroundColor:'#FFFFFF'}}>
-        <Box sx={{ width: "100%",marginBottom:'50px'}} >
-          <Grid
-            columnSpacing={{ sm: 2, md: 3 }}
-            spacing={6}
-            align="center"
-            container
-           
-          >
-            <Grid item xs={12} md={12}>
-              <h2 style={{ color: COLORS.colorDark,marginTop:'100px'}}>Teams</h2>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item" >
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80}}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80 }}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80 }}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80}}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80}}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80 }}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80}}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80}}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80}}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80}}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
-
-            <Grid item xs={3} style={verticalAlignStyle} className="teams-grid-item">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 80, height: 80}}
-              />
-              <span style={{fontWeight:'bold'}}>India</span>
-            </Grid>
+    <div>
+      <Box sx={{ width: "100%", marginBottom: "50px" }}>
+        <Grid
+          columnSpacing={{ sm: 2, md: 3 }}
+          spacing={6}
+          align="center"
+          container
+        >
+          <Grid item xs={12} md={12}>
+            <h2 style={{ color: COLORS.colorDark, marginTop: "100px" }}>
+              Teams
+            </h2>
           </Grid>
-        </Box>
-      </div>
-    </>
-  )
 
+          {teams === null
+            ? null
+            : teams.map((team, index) => (
+                <Grid item xs={12} md={4} key={index}>
+                  <Box
+                    sx={{
+                      minWidth: 175,
+                      maxWidth: 250,
+                    }}
+                  >
+                    <Card
+                      variant="outlined"
+                      sx={{ backgroundColor: COLORS.colorLight }}
+                    >
+                      <CardActionArea
+                        component={Link}
+                        to={team.name}
+                        state={{ team: team }}
+                      >
+                        <CardContent>
+                          <Avatar
+                            alt="Remy Sharp"
+                            src={team.flag}
+                            sx={{ width: 80, height: 80 }}
+                          />
+                          <Typography variant="h5" component="div">
+                            {team.name}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Box>
+                </Grid>
+              ))}
+        </Grid>
+      </Box>
+    </div>
+  );
 
   return (
-    <div style={{backgroundColor:'#FFFFFF'}}>
-      {parallaxContainer()}
-      <Container>{TeamList()}</Container>
-    </div>
+    <>
+      {displayTeams === true ? (
+        <div className="teams-container">
+          {parallaxContainer()}
+          <Container>{TeamList()}</Container>
+        </div>
+      ) : (
+        <Outlet></Outlet>
+      )}
+    </>
   );
 }
 

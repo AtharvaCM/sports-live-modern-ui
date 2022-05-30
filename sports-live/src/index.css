@@ -53,9 +53,9 @@ code {
 /* cricket teams page */
 
 .teams-grid-item {
-  border-radius: 2px;
   transition: all 0.25s linear;
   cursor: pointer;
+  border: 1px solid red;
 }
 
 .teams-grid-item:hover {
@@ -76,4 +76,9 @@ code {
 .news-card-img:hover,
 .news-card-img:focus {
   transform: scale(1.25);
+}
+
+/* Teams Page */
+.teams-container > .react-parallax > img {
+  width: 135% !important;
 }

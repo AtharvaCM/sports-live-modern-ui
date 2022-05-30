@@ -135,7 +135,7 @@ const CricketSubNavbar = () => {
                     my: 0,
                     display: "block",
                     color:
-                      pathName === `/Cricket/${page}`
+                      pathName.includes(`/Cricket/${page}`) === true
                         ? COLORS.colorDark
                         : COLORS.colorLight,
                   }}
