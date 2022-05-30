@@ -7,6 +7,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  background-color: #f8f9fa;
 }
 
 code {
@@ -28,4 +29,51 @@ code {
 
 .landing-video {
   width: 100vw !important;
+}
+
+/*card hover*/
+.card-hover {
+  display: block;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: all 0.25s linear;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.card-hover:hover {
+  box-shadow: -1px 10px 29px 0px rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
+/* Gallery Page */
+.galley-img-list {
+  height: calc(100vh - 150px);
+}
+
+/* cricket teams page */
+
+.teams-grid-item {
+  border-radius: 2px;
+  transition: all 0.25s linear;
+  cursor: pointer;
+}
+
+.teams-grid-item:hover {
+  transform: scale(1.08);
+}
+
+/* News Page */
+.news-card {
+  overflow: hidden;
+}
+
+.news-card-img {
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+.news-card-img:hover,
+.news-card-img:focus {
+  transform: scale(1.25);
 }

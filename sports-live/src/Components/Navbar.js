@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,14 +11,21 @@ import SportsIcon from "@mui/icons-material/Sports";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { COLORS } from "../Constants/Theme";
 
 const pages = ["Home", "Cricket", "Football"];
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const location = useLocation();
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [pathName, setPathName] = useState("/Cricket");
+
+  useEffect(() => {
+    console.log("navbar location", location.pathname);
+    setPathName(location.pathname);
+  }, [location]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -127,12 +134,26 @@ const Navbar = () => {
               <Link
                 key={page}
                 to={`/${page}`}
-                style={{ textDecoration: "none", color: "white" }}
+                style={{
+                  textDecoration: "none",
+                  color:
+                    pathName.includes(`/${page}`) === true
+                      ? COLORS.colorDanger
+                      : COLORS.colorLight,
+                }}
               >
                 <Button
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, mx: 2, color: "white", display: "block" }}
-                  variant="contained"
+                  sx={{
+                    my: 2,
+                    mx: 2,
+                    color:
+                      pathName.includes(`/${page}`) === true
+                        ? COLORS.colorDanger
+                        : COLORS.colorLight,
+                    display: "block",
+                  }}
+                  variant="text"
                 >
                   {page}
                 </Button>

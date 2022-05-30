@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,14 +10,21 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { COLORS } from "../../Constants/Theme";
 
 const pages = ["LiveScore", "Rankings", "Series", "Gallery", "News", "Teams"];
 
 const CricketSubNavbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const location = useLocation();
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [pathName, setPathName] = useState("/Cricket");
+
+  useEffect(() => {
+    console.log("location", location.pathname);
+    setPathName(location.pathname);
+  }, [location]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -64,7 +71,13 @@ const CricketSubNavbar = () => {
                 <Typography textAlign="center">
                   <Link
                     to={`/Cricket`}
-                    style={{ textDecoration: "none", color: "black" }}
+                    style={{
+                      textDecoration: "none",
+                      color:
+                        pathName === "/Cricket"
+                          ? COLORS.colorDanger
+                          : COLORS.colorDark,
+                    }}
                   >
                     Info
                   </Link>
@@ -99,8 +112,11 @@ const CricketSubNavbar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 0,
-                  color: "white",
                   display: "block",
+                  color:
+                    pathName === "/Cricket"
+                      ? COLORS.colorDanger
+                      : COLORS.colorLight,
                 }}
                 variant="text"
               >
@@ -117,8 +133,11 @@ const CricketSubNavbar = () => {
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 0,
-                    color: "white",
                     display: "block",
+                    color:
+                      pathName === `/Cricket/${page}`
+                        ? COLORS.colorDanger
+                        : COLORS.colorLight,
                   }}
                   variant="text"
                 >
