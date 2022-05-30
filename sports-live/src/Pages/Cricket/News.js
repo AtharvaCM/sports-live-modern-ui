@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Parallax } from "react-parallax";
 
 import Grid from "@mui/material/Grid";
@@ -7,22 +7,35 @@ import Box from "@mui/material/Box";
 
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 
 import { COLORS } from "../../Constants/Theme";
+import NewsAPI from "../../API/Cricket/NewsAPI";
 
 const insideStyles = {
-  background: "black",
   padding: 20,
   position: "absolute",
   top: "40%",
   left: "20%",
-  fontSize: "2rem",
+  fontSize: "4rem",
   color: "white",
   transform: "translate(-50%,-50%)",
 };
 
 function News() {
+  const [newsArticles, setNewsArticles] = useState(null);
+
+  useEffect(() => {
+    // Call the news API
+    NewsAPI()
+      .then((data) => {
+        setNewsArticles(data.articles);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const parallaxContainer = () => (
     <Parallax
       blur={{ min: -15, max: 10 }}
@@ -40,77 +53,51 @@ function News() {
     <Box sx={{ width: "100%", mb: 5 }}>
       <Grid columnSpacing={{ xs: 1, sm: 2, md: 1 }} align="center" container>
         <Grid item xs={12} md={12}>
-          <h2 style={{ color: COLORS.colorLight }}>Latest News</h2>
+          <h2 style={{ color: COLORS.colorDark }}>Latest News</h2>
         </Grid>
 
-        <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345, height: 400 }}>
-            <div className="news-card">
-              <CardMedia
-                component="img"
-                height="250"
-                image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                alt="green iguana"
-                className="news-card-img"
-              />
-            </div>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lizard
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345, height: 400 }}>
-            <div className="news-card">
-              <CardMedia
-                component="img"
-                height="250"
-                image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                alt="green iguana"
-                className="news-card-img"
-              />
-            </div>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lizard
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345, height: 400 }}>
-            <div className="news-card">
-              <CardMedia
-                component="img"
-                height="250"
-                image="https://images.unsplash.com/photo-1584359983106-ef9366f27454?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG5ld3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                alt="green iguana"
-                className="news-card-img"
-              />
-            </div>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lizard
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        {newsArticles.map((newsArticle, index) => (
+          <Grid item xs={6} key={index} sx={{ mb: 5 }}>
+            <Card
+              sx={{
+                maxWidth: 555,
+                height: 400,
+                backgroundColor: COLORS.colorLight,
+              }}
+            >
+              <Tooltip title="Open in a new page" placement="top">
+                <CardActionArea
+                  component="a"
+                  href={newsArticle.url}
+                  target="_blank"
+                >
+                  <div className="news-card">
+                    <CardMedia
+                      component="img"
+                      height="250"
+                      image={newsArticle.urlToImage}
+                      alt="news"
+                      className="news-card-img"
+                    />
+                  </div>
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h6"
+                      component="div"
+                      color={COLORS.colorDark}
+                    >
+                      {newsArticle.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {newsArticle.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Tooltip>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );
@@ -118,7 +105,7 @@ function News() {
   return (
     <>
       {parallaxContainer()}
-      {newsSection()}
+      {newsArticles === null ? null : newsSection()}
     </>
   );
 }

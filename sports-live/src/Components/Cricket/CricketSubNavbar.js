@@ -75,8 +75,8 @@ const CricketSubNavbar = () => {
                       textDecoration: "none",
                       color:
                         pathName === "/Cricket"
-                          ? COLORS.colorDanger
-                          : COLORS.colorDark,
+                          ? COLORS.colorDark
+                          : COLORS.colorLight,
                     }}
                   >
                     Info
@@ -115,7 +115,7 @@ const CricketSubNavbar = () => {
                   display: "block",
                   color:
                     pathName === "/Cricket"
-                      ? COLORS.colorDanger
+                      ? COLORS.colorDark
                       : COLORS.colorLight,
                 }}
                 variant="text"
@@ -135,8 +135,8 @@ const CricketSubNavbar = () => {
                     my: 0,
                     display: "block",
                     color:
-                      pathName === `/Cricket/${page}`
-                        ? COLORS.colorDanger
+                      pathName.includes(`/Cricket/${page}`) === true
+                        ? COLORS.colorDark
                         : COLORS.colorLight,
                   }}
                   variant="text"
