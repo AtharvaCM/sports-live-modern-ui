@@ -9,8 +9,8 @@ import {
 } from "../../../API/Cricket/TeamStatsAPI";
 import { COLORS } from "../../../Constants/Theme";
 import TestStats from "./Stats/TestStats";
-import ODIStats from "./Stats/ODIStats"
-import T20Stats from "./Stats/T20Stats"
+import ODIStats from "./Stats/ODIStats";
+import T20Stats from "./Stats/T20Stats";
 
 const doughnutChartBGColors = [
   COLORS.chartGreen,
@@ -45,7 +45,8 @@ function TeamStats({ team }) {
     const getTotalMatchesData = () => {
       TeamStatsTotalMatchesAPI(team.id)
         .then((response) => {
-          const labels = Object.keys(response.stats.stats.odi).slice(1);
+          // const labels = Object.keys(response.stats.stats.odi).slice(1);
+          const labels = ["Matches Won", "Matches Lost", "Matches Drawn"];
           const dataODI = Object.values(response.stats.stats.odi).slice(1);
           const dataTest = Object.values(response.stats.stats.test).slice(1);
           const dataT20 = Object.values(response.stats.stats.t20).slice(1);
@@ -91,6 +92,7 @@ function TeamStats({ team }) {
     const getWinPercentageByYearData = () => {
       TeamStatsWinPercentageByYearAPI(team.id)
         .then((response) => {
+          console.log("winPerResponse", response);
           const labels = Object.keys(
             response.stats.stats.odi.win_percentage
           ).slice(0, -1);
@@ -156,55 +158,66 @@ function TeamStats({ team }) {
   }, [team.id, team.name]);
 
   const toggleButtons = () => (
-    <ToggleButtonGroup
-      color="primary"
-      value={alignment}
-      exclusive
-      onChange={handleChange}
-      fullWidth
-    >
-      <ToggleButton value="Test" fullWidth>
-        Test
-      </ToggleButton>
-      <ToggleButton value="ODI" fullWidth>
-        ODI
-      </ToggleButton>
-      <ToggleButton value="T20" fullWidth>
-        T20
-      </ToggleButton>
-    </ToggleButtonGroup>
+    <>
+      {chartData === null ? null : winPercentage === null ? null : (
+        <ToggleButtonGroup
+          color="primary"
+          value={alignment}
+          exclusive
+          onChange={handleChange}
+          fullWidth
+        >
+          <ToggleButton value="Test" fullWidth>
+            Test
+          </ToggleButton>
+          <ToggleButton value="ODI" fullWidth>
+            ODI
+          </ToggleButton>
+          <ToggleButton value="T20" fullWidth>
+            T20
+          </ToggleButton>
+        </ToggleButtonGroup>
+      )}
+    </>
   );
 
   const statsContainer = () => (
     <>
       {alignment === "Test" ? (
-        winPercentage === null ? null : (
+        winPercentage === null ? null : chartData === null ? null : (
           <TestStats
             totalMatchesData={chartData.totalMatchesTest}
             totalMatchesChartData={chartData.test}
             winPercentageByYear={winPercentage.winPercentageByYearTest}
+            winPercentageByYearChartData={winPercentage.test}
           />
         )
       ) : alignment === "ODI" ? (
-        <ODIStats
-          totalMatchesData={chartData.totalMatchesODI}
-          totalMatchesChartData={chartData.odi}
-          winPercentageByYear={winPercentage.winPercentageByYearODI}
-        ></ODIStats>
-      ) : alignment === "T20"?(
-        <T20Stats
-          totalMatchesData={chartData.totalMatchesT20}
-          totalMatchesChartData={chartData.t20}
-          winPercentageByYear={winPercentage.winPercentageByYearT20}
-        ></T20Stats>
-      ):null}
+        winPercentage === null ? null : chartData === null ? null : (
+          <ODIStats
+            totalMatchesData={chartData.totalMatchesODI}
+            totalMatchesChartData={chartData.odi}
+            winPercentageByYear={winPercentage.winPercentageByYearODI}
+            winPercentageByYearChartData={winPercentage.odi}
+          />
+        )
+      ) : alignment === "T20" ? (
+        winPercentage === null ? null : chartData === null ? null : (
+          <T20Stats
+            totalMatchesData={chartData.totalMatchesT20}
+            totalMatchesChartData={chartData.t20}
+            winPercentageByYear={winPercentage.winPercentageByYearT20}
+            winPercentageByYearChartData={winPercentage.t20}
+          />
+        )
+      ) : null}
     </>
   );
 
   return (
     <>
-      {chartData === null ? null : toggleButtons()}
-      {chartData === null && winPercentage === null ? null : statsContainer()}
+      {toggleButtons()}
+      {statsContainer()}
     </>
   );
 }
