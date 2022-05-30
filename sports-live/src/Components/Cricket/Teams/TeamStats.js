@@ -9,6 +9,8 @@ import {
 } from "../../../API/Cricket/TeamStatsAPI";
 import { COLORS } from "../../../Constants/Theme";
 import TestStats from "./Stats/TestStats";
+import ODIStats from "./Stats/ODIStats"
+import T20Stats from "./Stats/T20Stats"
 
 const doughnutChartBGColors = [
   COLORS.chartGreen,
@@ -184,8 +186,18 @@ function TeamStats({ team }) {
           />
         )
       ) : alignment === "ODI" ? (
-        <>ODI</>
-      ) : null}
+        <ODIStats
+          totalMatchesData={chartData.totalMatchesODI}
+          totalMatchesChartData={chartData.odi}
+          winPercentageByYear={winPercentage.winPercentageByYearODI}
+        ></ODIStats>
+      ) : alignment === "T20"?(
+        <T20Stats
+          totalMatchesData={chartData.totalMatchesT20}
+          totalMatchesChartData={chartData.t20}
+          winPercentageByYear={winPercentage.winPercentageByYearT20}
+        ></T20Stats>
+      ):null}
     </>
   );
 
