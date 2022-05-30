@@ -17,7 +17,7 @@ import NewsFootball from "../Pages/Football/NewsFootball";
 import RankingsFootball from "../Pages/Football/RankingsFootball";
 import LeaguesFootball from "../Pages/Football/LeaguesFootball";
 import HomePage from "../Pages/HomePage";
-import TeamInfo from "../Components/Cricket/TeamInfo";
+import TeamInfo from "../Components/Cricket/Teams/TeamInfo";
 
 function Router() {
   return (
@@ -32,7 +32,7 @@ function Router() {
           <Route path="Gallery" element={<Gallery />} />
           <Route path="News" element={<News />} />
           <Route path="Teams" element={<Teams />}>
-            <Route path=":name" element={<TeamInfo />} />
+            <Route path=":name" element={<TeamInfo />}></Route>
           </Route>
           <Route path="Players" element={<Player />} />
         </Route>

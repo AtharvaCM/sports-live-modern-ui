@@ -11,8 +11,8 @@ import Tooltip from "@mui/material/Tooltip";
 
 import { Link } from "react-router-dom";
 
-import PlayersListAPI from "../../API/Cricket/PlayersListAPI";
-import { COLORS } from "../../Constants/Theme";
+import PlayersListAPI from "../../../API/Cricket/PlayersListAPI";
+import { COLORS } from "../../../Constants/Theme";
 
 function TeamPlayers({ team }) {
   const [players, setPlayers] = useState(null);
