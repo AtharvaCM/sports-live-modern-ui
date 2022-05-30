@@ -17,12 +17,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 const insideStyles = {
-  background: "black",
   padding: 20,
   position: "absolute",
   top: "40%",
   left: "20%",
-  fontSize: "2rem",
+  fontSize: "4rem",
   color: "white",
   transform: "translate(-50%,-50%)",
 };
@@ -62,7 +61,7 @@ function Cricket() {
       bgImageAlt="CricInfo Img"
       strength={-200}
     >
-      <div style={{ height: "800px" }}>
+      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}>
         <div style={insideStyles}>Cricket</div>
       </div>
     </Parallax>
@@ -93,12 +92,12 @@ function Cricket() {
           alignItems="center"
           minHeight="40vh"
         >
-          <Grid container spacing={2} align="center">
+          <Grid container spacing={1} align="center">
             <Grid item xs={6} md={12}>
-              <h3>Featured match</h3>
+              <h2>Featured match</h2>
             </Grid>
 
-            <Grid item xs={6} md={4}>
+            <Grid item xs={6} md={4} sx={{ my: "auto" }}>
               <Avatar
                 alt="Remy Sharp"
                 src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
@@ -116,7 +115,7 @@ function Cricket() {
               <h4 style={{ marginTop: "5px" }}>Indian won by 10 wickets </h4>
             </Grid>
 
-            <Grid item xs={6} md={4}>
+            <Grid item xs={6} md={4} sx={{ my: "auto" }}>
               <Avatar
                 alt="Remy Sharp"
                 src="http://geo5.net/imagens/Bandeira-da-Africa-do-Sul.png"
