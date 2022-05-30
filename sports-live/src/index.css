@@ -49,3 +49,20 @@ code {
 .galley-img-list {
   height: calc(100vh - 150px);
 }
+
+
+/* cricket teams page */
+
+.teams-grid-item{
+ 
+  border-radius: 2px;
+  transition: all 0.25s linear;
+  cursor: pointer;
+  
+  
+}
+
+.teams-grid-item:hover{
+  
+  transform: scale(1.08);
+}

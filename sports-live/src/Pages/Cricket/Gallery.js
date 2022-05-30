@@ -45,7 +45,7 @@ function Gallery() {
             src={`${item.urls.full}?w=248&fit=crop&auto=format`}
             srcSet={`${item.urls.full}?w=248&fit=crop&auto=format&dpr=2 2x`}
             alt={item.alt_description}
-            loading="lazy"
+            loading="eager"
           />
           <ImageListItemBar
             title={item.alt_description}
