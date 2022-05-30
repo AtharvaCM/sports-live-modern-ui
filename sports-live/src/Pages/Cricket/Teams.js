@@ -9,6 +9,7 @@ import { CardActionArea } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
 
@@ -90,22 +91,24 @@ function Teams() {
                       variant="outlined"
                       sx={{ backgroundColor: COLORS.colorLight }}
                     >
-                      <CardActionArea
-                        component={Link}
-                        to={team.name}
-                        state={{ team: team }}
-                      >
-                        <CardContent>
-                          <Avatar
-                            alt="Remy Sharp"
-                            src={team.flag}
-                            sx={{ width: 80, height: 80 }}
-                          />
-                          <Typography variant="h5" component="div">
-                            {team.name}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
+                      <Tooltip title="Click to view more" placement="top">
+                        <CardActionArea
+                          component={Link}
+                          to={team.name}
+                          state={{ team: team }}
+                        >
+                          <CardContent>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={team.flag}
+                              sx={{ width: 80, height: 80 }}
+                            />
+                            <Typography variant="h5" component="div">
+                              {team.name}
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Tooltip>
                     </Card>
                   </Box>
                 </Grid>

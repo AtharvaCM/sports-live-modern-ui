@@ -91,10 +91,10 @@ function TeamInfo() {
           <TeamSchedule team={team} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <TeamPlayers />
+          <TeamPlayers team={team} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <TeamStats />
+          <TeamStats team={team} />
         </TabPanel>
       </Box>
     </>
