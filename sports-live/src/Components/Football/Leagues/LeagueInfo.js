@@ -91,7 +91,7 @@ function LeagueInfo() {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    <LeagueSchedule></LeagueSchedule>
+                    <LeagueSchedule league={league}></LeagueSchedule>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                    <LeagueTeams league={league}></LeagueTeams>
