@@ -103,54 +103,59 @@ function Cricket() {
         }}
       >
         {/* featured match section */}
+        {featuredMatches === null ? null : (
+          <Box
+            sx={{ flexGrow: 1 }}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="40vh"
+          >
+            <Grid container spacing={1} align="center">
+              <Grid item xs={6} md={12}>
+                <h2>Featured match</h2>
+              </Grid>
 
-        <Box
-          sx={{ flexGrow: 1 }}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="40vh"
-        >
-          <Grid container spacing={1} align="center">
-            <Grid item xs={6} md={12}>
-              <h2>Featured match</h2>
-            </Grid>
+              <Grid item xs={6} md={4} sx={{ my: "auto" }}>
+                <Avatar
+                  alt="Team Logo"
+                  src={featuredMatches[0].teamInfo[0].img}
+                  sx={{ width: 100, height: 100 }}
+                />
+                {featuredMatches[0].teams[0]}
+              </Grid>
 
-            <Grid item xs={6} md={4} sx={{ my: "auto" }}>
-              <Avatar
-                alt="Team Logo"
-                src={featuredMatches[0].teamInfo[0].img}
-                sx={{ width: 100, height: 100 }}
-              />
-              {featuredMatches[0].teams[0]}
-            </Grid>
+              <Grid item xs={6} md={4}>
+                <h4 style={{ marginBottom: "5px" }}>
+                  {" "}
+                  Date : {featuredMatches[0].date}
+                </h4>
+                <Item>
+                  {featuredMatches[0].teams[0]} :{" "}
+                  {featuredMatches[0].score[0].r} /{" "}
+                  {featuredMatches[0].score[0].w} (
+                  {featuredMatches[0].score[0].o}) <br />
+                  {featuredMatches[0].teams[1]} :{" "}
+                  {featuredMatches[0].score[1].r} /{" "}
+                  {featuredMatches[0].score[1].w} (
+                  {featuredMatches[0].score[1].o})
+                </Item>
+                <h4 style={{ marginTop: "5px" }}>
+                  {featuredMatches[0].status}
+                </h4>
+              </Grid>
 
-            <Grid item xs={6} md={4}>
-              <h4 style={{ marginBottom: "5px" }}>
-                {" "}
-                Date : {featuredMatches[0].date}
-              </h4>
-              <Item>
-                {featuredMatches[0].teams[0]} : {featuredMatches[0].score[0].r}{" "}
-                / {featuredMatches[0].score[0].w} (
-                {featuredMatches[0].score[0].o}) <br />
-                {featuredMatches[0].teams[1]} : {featuredMatches[0].score[1].r}{" "}
-                / {featuredMatches[0].score[1].w} (
-                {featuredMatches[0].score[1].o})
-              </Item>
-              <h4 style={{ marginTop: "5px" }}>{featuredMatches[0].status}</h4>
+              <Grid item xs={6} md={4} sx={{ my: "auto" }}>
+                <Avatar
+                  alt="Team Logo"
+                  src={featuredMatches[0].teamInfo[1].img}
+                  sx={{ width: 100, height: 100 }}
+                />
+                {featuredMatches[0].teams[1]}
+              </Grid>
             </Grid>
-
-            <Grid item xs={6} md={4} sx={{ my: "auto" }}>
-              <Avatar
-                alt="Team Logo"
-                src={featuredMatches[0].teamInfo[1].img}
-                sx={{ width: 100, height: 100 }}
-              />
-              {featuredMatches[0].teams[1]}
-            </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        )}
       </div>
     </Parallax>
   );
