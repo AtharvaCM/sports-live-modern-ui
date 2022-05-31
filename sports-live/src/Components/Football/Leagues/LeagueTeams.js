@@ -35,11 +35,6 @@ function LeagueTeams({ league }) {
               align="center"
               container
             >
-              <Grid item xs={12} md={12}>
-                <h2 style={{ color: COLORS.colorDark, marginTop: "20px" }}>
-                  Teams
-                </h2>
-              </Grid>
     
               {teams === null
                 ? null

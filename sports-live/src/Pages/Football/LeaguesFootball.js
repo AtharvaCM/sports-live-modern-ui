@@ -44,7 +44,7 @@ const LeagueList = (league) => (
 
 <>
   
-  <Typography variant="h5" align="center" sx={{mt:2}}> Top Leagues</Typography>
+  <Typography variant="h5" align="center" sx={{mt:2,mb:2}}> Top Leagues</Typography>
   <TableContainer component={Paper}>
     <Table sx={{ minWidth: 700 }} aria-label="customized table">
       <TableHead>
@@ -120,8 +120,10 @@ function LeaguesFootball() {
   return (
     <>
       {displayTeams === true ? (
-        <div className="teams-container">
+        <div>
+          <Container maxWidth >
           {LeagueList(league)}
+          </Container>
         </div>
       ) : (
         <Outlet></Outlet>
