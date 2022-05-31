@@ -48,8 +48,8 @@ function GalleryFootball() {
       {images.map((item) => (
         <ImageListItem key={item.urls.full}>
           <img
-            src={`${item.urls.full}?w=248&fit=crop&auto=format`}
-            srcSet={`${item.urls.full}?w=248&fit=crop&auto=format&dpr=2 2x`}
+            src={`${item.urls.small_s3}?w=248&fit=crop&auto=format`}
+            srcSet={`${item.urls.small_s3}?w=248&fit=crop&auto=format&dpr=2 2x`}
             alt={item.alt_description}
             loading="eager"
           />
