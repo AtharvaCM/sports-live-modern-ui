@@ -39,7 +39,7 @@ function NewsFootball() {
   const parallaxContainer = () => (
     <Parallax
       blur={{ min: -15, max: 10 }}
-      bgImage={require("../../Assets/Images/Football/footballCover.jpg")}
+      bgImage={require("../../Assets/Images/Football/footballCover1.jpg")}
       bgImageAlt="CricInfo Img"
       strength={-200}
     >
