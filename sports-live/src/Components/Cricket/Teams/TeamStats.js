@@ -46,13 +46,27 @@ function TeamStats({ team }) {
       TeamStatsTotalMatchesAPI(team.id)
         .then((response) => {
           // const labels = Object.keys(response.stats.stats.odi).slice(1);
-          const labels = ["Matches Won", "Matches Lost", "Matches Drawn"];
           const dataODI = Object.values(response.stats.stats.odi).slice(1);
           const dataTest = Object.values(response.stats.stats.test).slice(1);
           const dataT20 = Object.values(response.stats.stats.t20).slice(1);
+          const labelsODI = [
+            `Matches Won ${dataODI[0]}`,
+            `Matches Lost ${dataODI[1]}`,
+            `Matches Drawn ${dataODI[2]}`,
+          ];
+          const labelsTest = [
+            `Matches Won ${dataTest[0]}`,
+            `Matches Lost ${dataTest[1]}`,
+            `Matches Drawn ${dataTest[2]}`,
+          ];
+          const labelsT20 = [
+            `Matches Won ${dataT20[0]}`,
+            `Matches Lost ${dataT20[1]}`,
+            `Matches Drawn ${dataT20[2]}`,
+          ];
           setChartData({
             odi: {
-              labels: labels,
+              labels: labelsODI,
               datasets: [
                 {
                   label: `${team.name} ODI Stats`,
@@ -62,7 +76,7 @@ function TeamStats({ team }) {
               ],
             },
             test: {
-              labels: labels,
+              labels: labelsTest,
               datasets: [
                 {
                   label: `${team.name} Test Stats`,
@@ -72,7 +86,7 @@ function TeamStats({ team }) {
               ],
             },
             t20: {
-              labels: labels,
+              labels: labelsT20,
               datasets: [
                 {
                   label: `${team.name} T20 Stats`,

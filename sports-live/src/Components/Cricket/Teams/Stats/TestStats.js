@@ -27,34 +27,34 @@ function TestStats({
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">#</StyledTableCell>
-            <StyledTableCell align="center">Stat</StyledTableCell>
+            <StyledTableCell align="center">Match Status</StyledTableCell>
+            <StyledTableCell align="center">Total</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           <StyledTableRow>
-            <StyledTableCell align="center">Matches played</StyledTableCell>
+            <StyledTableCell align="center">Played</StyledTableCell>
             <StyledTableCell align="center">
               {totalMatchesData.matches_played}
             </StyledTableCell>
           </StyledTableRow>
 
           <StyledTableRow>
-            <StyledTableCell align="center">Matches Won</StyledTableCell>
+            <StyledTableCell align="center">Won</StyledTableCell>
             <StyledTableCell align="center">
               {totalMatchesData.matches_won}
             </StyledTableCell>
           </StyledTableRow>
 
           <StyledTableRow>
-            <StyledTableCell align="center">Matches Lost</StyledTableCell>
+            <StyledTableCell align="center">Lost</StyledTableCell>
             <StyledTableCell align="center">
               {totalMatchesData.matches_lost}
             </StyledTableCell>
           </StyledTableRow>
 
           <StyledTableRow>
-            <StyledTableCell align="center">Matches Drawn</StyledTableCell>
+            <StyledTableCell align="center">Drawn</StyledTableCell>
             <StyledTableCell align="center">
               {totalMatchesData.matches_drawn}
             </StyledTableCell>
@@ -124,14 +124,14 @@ function TestStats({
   return (
     <>
       <div style={{ textAlign: "center" }}>
-        <Typography variant="h4" sx={{ mt: 4 }}>
+        <Typography variant="h5" sx={{ mt: 4 }}>
           Total Matches
         </Typography>
         {totalMatchesTable()}
         {totalMatchesChart()}
       </div>
       <div style={{ textAlign: "center" }}>
-        <Typography variant="h4" sx={{ mt: 10 }}>
+        <Typography variant="h5" sx={{ mt: 10 }}>
           Win Percentage Of Last 5 Years
         </Typography>
         {winPercentageByYearTable()}
