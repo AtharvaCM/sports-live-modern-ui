@@ -18,6 +18,7 @@ import RankingsFootball from "../Pages/Football/RankingsFootball";
 import LeaguesFootball from "../Pages/Football/LeaguesFootball";
 import HomePage from "../Pages/HomePage";
 import TeamInfo from "../Components/Cricket/Teams/TeamInfo";
+import LeagueInfo from "../Components/Football/Leagues/LeagueInfo";
 
 function Router() {
   return (
@@ -40,7 +41,9 @@ function Router() {
         <Route path="Football" element={<Football />}>
           <Route path="LiveScore" element={<LiveScoreFootball />} />
           <Route path="Rankings" element={<RankingsFootball />} />
-          <Route path="Series" element={<LeaguesFootball />} />
+          <Route path="Series" element={<LeaguesFootball />} >
+            <Route path=":name" element={<LeagueInfo />}></Route>
+          </Route>
           <Route path="Gallery" element={<GalleryFootball />} />
           <Route path="News" element={<NewsFootball />} />
         </Route>

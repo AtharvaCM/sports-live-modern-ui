@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 
+import { Link, Outlet, useLocation } from "react-router-dom";
+
 import LeagueListApi from "../../API/Football/LeagueListApi";
 
 
@@ -40,8 +42,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const LeagueList = (league) => (
 
-  //console.log(league)
-
+<>
+  
+  <Typography variant="h5" align="center" sx={{mt:2,mb:2}}> Top Leagues</Typography>
   <TableContainer component={Paper}>
     <Table sx={{ minWidth: 700 }} aria-label="customized table">
       <TableHead>
@@ -53,8 +56,13 @@ const LeagueList = (league) => (
         </TableRow>
       </TableHead>
       <TableBody>
-        {league ? league.slice(0,2).map((row) => (
-          <StyledTableRow key={row.country_logo}>
+        {league ? league.slice(0, 2).map((row) => (
+          <StyledTableRow key={row.country_logo}
+            component={Link}
+            to={row.league_name}
+            state={{ league: row }}
+            sx={{textDecoration:'none'}}
+          >
 
 
 
@@ -86,30 +94,40 @@ const LeagueList = (league) => (
       </TableBody>
     </Table>
   </TableContainer>
-
+  </>
 
 )
 
 
 function LeaguesFootball() {
+  const location = useLocation();
+  const [displayTeams, setDisplayTeams] = useState(true);
   const [league, setleague] = useState(null)
 
   useEffect(() => {
+    //check path
+    location.pathname === "/Football/Series"
+      ? setDisplayTeams(true)
+      : setDisplayTeams(false);
+
+    //set api
     LeagueListApi().then((data) => {
       setleague(data.leagues)
     }).catch(err => console.log(err));
-  }, [])
+  }, [location])
 
   console.log(league);
   return (
     <>
-      <div style={{ textAlign: 'center' }}>
-
-        <Typography variant="h4" sx={{ mt: 2, mb: 2 }}>Top Leagues</Typography>
-        <Container maxWidth sx={{ margin: 2, marginLeft: 0 }}>
-          {league === null ? null : LeagueList(league)}
-        </Container>
-      </div>
+      {displayTeams === true ? (
+        <div>
+          <Container maxWidth >
+          {LeagueList(league)}
+          </Container>
+        </div>
+      ) : (
+        <Outlet></Outlet>
+      )}
 
 
     </>);

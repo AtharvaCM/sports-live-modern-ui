@@ -42,7 +42,7 @@ function LiveScore() {
             <Box
               sx={{
                 flexGrow: 1,
-                width: "80vw",
+                width: "95vw",
                 mx: "auto",
                 mb: 4,
               }}
