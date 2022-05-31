@@ -1,4 +1,4 @@
-import * as React from "react";
+import { React, useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,13 +9,21 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { COLORS } from "../../Constants/Theme";
 
 const pages = ["LiveScore", "Rankings", "Series", "Gallery", "News"];
 
 const FootballSubNavbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const location = useLocation();
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [pathName, setPathName] = useState("/Football");
+
+
+  useEffect(() => {
+    console.log("location", location.pathname);
+    setPathName(location.pathname);
+  }, [location]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -62,7 +70,8 @@ const FootballSubNavbar = () => {
                 <Typography textAlign="center">
                   <Link
                     to={`/Football`}
-                    style={{ textDecoration: "none", color: "black" }}
+                    style={{ textDecoration: "none", color: pathName === "/Cricket" ? COLORS.colorDark : COLORS.colorLight, }}
+
                   >
                     Info
                   </Link>
@@ -97,8 +106,11 @@ const FootballSubNavbar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 0,
-                  color: "white",
                   display: "block",
+                  color:
+                    pathName === "/Football"
+                      ? COLORS.colorDark
+                      : COLORS.colorLight,
                 }}
                 variant="text"
               >
@@ -115,8 +127,11 @@ const FootballSubNavbar = () => {
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 0,
-                    color: "white",
                     display: "block",
+                    color:
+                      pathName.includes(`/Football/${page}`) === true
+                        ? COLORS.colorDark
+                        : COLORS.colorLight,
                   }}
                   variant="text"
                 >
