@@ -309,7 +309,7 @@ function Cricket() {
 
   return (
     <>
-      <CricketSubNavbar></CricketSubNavbar>
+      <CricketSubNavbar />
       <Outlet />
       {displayInfo === true ? (
         <>

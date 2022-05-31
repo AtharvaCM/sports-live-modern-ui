@@ -8,29 +8,43 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import { StyledTableCell, StyledTableRow } from "../../../Constants/Styles";
+import { Avatar, Typography } from "@mui/material";
 
-function BattingRankings({ rows }) {
+function BattingRankings({ rows, matchType }) {
   //   console.log("rows", rows);
   const rankingsTable = () => (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Rank</StyledTableCell>
-            <StyledTableCell align="right">Image</StyledTableCell>
-            <StyledTableCell align="right">Name</StyledTableCell>
+            <StyledTableCell align="center">Rank</StyledTableCell>
+            <StyledTableCell align="center">Image</StyledTableCell>
+            <StyledTableCell align="center">Name</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.slice(0, 24).map((row) => {
-            console.log("Row", row);
+            // console.log("Row", row);
             return (
               <StyledTableRow key={row.id}>
-                <StyledTableCell component="th" scope="row">
-                  {row.batting.test.ranking}
+                <StyledTableCell align="center" component="th" scope="row">
+                  {matchType === "Test"
+                    ? row.batting.test.ranking
+                    : matchType === "ODI"
+                    ? row.batting.odi.ranking
+                    : matchType === "T20"
+                    ? row.batting.t20.ranking
+                    : "NA"}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.img_src}</StyledTableCell>
-                <StyledTableCell align="right">{row.name}</StyledTableCell>
+                <StyledTableCell align="right">
+                  <Avatar
+                    src={row.img_src}
+                    sx={{ mx: "auto", height: 80, width: 80 }}
+                  />
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography variant="body1">{row.name}</Typography>
+                </StyledTableCell>
               </StyledTableRow>
             );
           })}
