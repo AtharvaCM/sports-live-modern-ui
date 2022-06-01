@@ -19,7 +19,6 @@ const FootballSubNavbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [pathName, setPathName] = useState("/Football");
 
-
   useEffect(() => {
     console.log("location", location.pathname);
     setPathName(location.pathname);
@@ -70,8 +69,13 @@ const FootballSubNavbar = () => {
                 <Typography textAlign="center">
                   <Link
                     to={`/Football`}
-                    style={{ textDecoration: "none", color: pathName === "/Cricket" ? COLORS.colorDark : COLORS.colorLight, }}
-
+                    style={{
+                      textDecoration: "none",
+                      color:
+                        pathName === "/Cricket"
+                          ? COLORS.colorDark
+                          : COLORS.colorLight,
+                    }}
                   >
                     Info
                   </Link>
@@ -108,9 +112,7 @@ const FootballSubNavbar = () => {
                   my: 0,
                   display: "block",
                   color:
-                    pathName === "/Football"
-                      ? COLORS.colorDark
-                      : COLORS.colorLight,
+                    pathName === "/Football" ? "darkblue" : COLORS.colorLight,
                 }}
                 variant="text"
               >
@@ -130,7 +132,7 @@ const FootballSubNavbar = () => {
                     display: "block",
                     color:
                       pathName.includes(`/Football/${page}`) === true
-                        ? COLORS.colorDark
+                        ? "darkblue"
                         : COLORS.colorLight,
                   }}
                   variant="text"

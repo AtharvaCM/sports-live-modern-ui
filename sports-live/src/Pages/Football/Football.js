@@ -79,7 +79,7 @@ function Football() {
       blur={{ min: -15, max: 10 }}
       bgImage={require("../../Assets/Images/Football/footballCover1.jpg")}
       bgImageAlt="CricInfo Img"
-      strength={-200}
+      strength={-100}
     >
       <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}>
         <div style={insideStyles}>Football</div>
@@ -89,7 +89,7 @@ function Football() {
 
   const featuredMatchesCarousel = () => (
     <Parallax
-      bgImage={require("../../Assets/Images/Cricket/cricInfoPage.jpg")}
+      bgImage="https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2019/10/manchester-united-vs-chelse-1572440215.jpg"
       bgImageAlt="Featured Matches"
       strength={300}
       style={{
@@ -263,9 +263,9 @@ function Football() {
     <>
       <Parallax
         blur={{ min: -15, max: 10 }}
-        bgImage={require("../../Assets/Images/Cricket/cricInfoPage.jpg")}
+        bgImage="https://cdn.pixabay.com/photo/2016/11/29/02/05/audience-1866738__480.jpg"
         bgImageAlt="CricInfo Img"
-        strength={-200}
+        strength={-100}
       >
         <div
           style={{

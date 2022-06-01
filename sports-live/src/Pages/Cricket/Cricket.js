@@ -22,16 +22,6 @@ import { COLORS } from "../../Constants/Theme";
 import NewsAPI from "../../API/Cricket/NewsAPI";
 import CurrentMatchesAPI from "../../API/Cricket/CurrentMatchesAPI";
 
-const insideStyles = {
-  padding: 20,
-  position: "absolute",
-  top: "40%",
-  left: "20%",
-  fontSize: "4rem",
-  color: "white",
-  transform: "translate(-50%,-50%)",
-};
-
 const verticalAlignStyle = {
   display: "flex",
   alignItems: "center",
@@ -78,13 +68,11 @@ function Cricket() {
   const parallaxContainer = () => (
     <Parallax
       blur={{ min: -15, max: 10 }}
-      bgImage={require("../../Assets/Images/Cricket/cricInfoPage.jpg")}
+      bgImage="https://wallpaperaccess.com/full/1088580.jpg"
       bgImageAlt="CricInfo Img"
       strength={-200}
     >
-      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}>
-        <div style={insideStyles}>Cricket</div>
-      </div>
+      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}></div>
     </Parallax>
   );
 
@@ -248,7 +236,7 @@ function Cricket() {
     <>
       <Parallax
         blur={{ min: -15, max: 10 }}
-        bgImage={require("../../Assets/Images/Cricket/cricInfoPage.jpg")}
+        bgImage="https://static.dezeen.com/uploads/2018/11/lords-cricket-ground-wilkinson-eyre_dezeen_2364_col_3.jpg"
         bgImageAlt="CricInfo Img"
         strength={-200}
       >
