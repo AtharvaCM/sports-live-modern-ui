@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -8,8 +10,8 @@ import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
-import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
-import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
+import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
+import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 
 import LiveScoreFootballApi from "../../API/Football/FootballLiveScoreApi";
 import { COLORS } from "../../Constants/Theme";
@@ -25,19 +27,17 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function LiveScoreFootball() {
-  
-  const [liveMatches,setliveMatches] = useState(null);
+  const navigate = useNavigate();
+
+  const [liveMatches, setliveMatches] = useState(null);
 
   useEffect(() => {
     // Call the match API
     LiveScoreFootballApi()
       .then((response) => {
         setliveMatches(response.matches);
-        
       })
       .catch((err) => console.log(err));
-
-      
   }, []);
 
   console.log(liveMatches);
@@ -52,7 +52,7 @@ function LiveScoreFootball() {
                 width: "95vw",
                 mx: "auto",
                 mb: 4,
-                cursor:'pointer'
+                cursor: "pointer",
               }}
               display="flex"
               justifyContent="center"
@@ -72,6 +72,11 @@ function LiveScoreFootball() {
                     boxShadow: 3,
                   },
                 }}
+                onClick={() => {
+                  navigate("/Football/MatchSummary", {
+                    state: { match: match },
+                  });
+                }}
               >
                 <Grid
                   item
@@ -84,7 +89,7 @@ function LiveScoreFootball() {
                   }}
                 >
                   <Typography variant="h5" gutterBottom>
-                    {match.event_home_team}  VS  {match.event_away_team}
+                    {match.event_home_team} VS {match.event_away_team}
                   </Typography>
                   <Box
                     sx={{
@@ -108,7 +113,7 @@ function LiveScoreFootball() {
                     >
                       <CampaignOutlinedIcon /> League : {match.league_name}
                     </Typography>
-                    
+
                     <Typography
                       variant="subtitle1"
                       gutterBottom
@@ -128,7 +133,7 @@ function LiveScoreFootball() {
 
                 <Grid item xs={6} md={4} sx={{ my: "auto" }}>
                   <Avatar
-                    alt="Team Logo"
+                    alt={match.event_home_team}
                     src={match.home_team_logo}
                     sx={{ width: 100, height: 100 }}
                   />
@@ -138,8 +143,19 @@ function LiveScoreFootball() {
                 </Grid>
 
                 <Grid item xs={6} md={4}>
-                  <Item sx={{ mt: 3 ,height:50,width:100}} >
-                    <Typography sx={{fontWeight:'bold'}} variant="h5">{match.event_ft_result}</Typography>
+                  <Item
+                    sx={{
+                      mt: 3,
+                      height: 50,
+                      width: 100,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography sx={{ fontWeight: "bold" }} variant="h5">
+                      {match.event_ft_result}
+                    </Typography>
                   </Item>
                   <Typography variant="h6" sx={{ mt: 2 }}>
                     {match.event_status}
@@ -148,7 +164,7 @@ function LiveScoreFootball() {
 
                 <Grid item xs={6} md={4} sx={{ my: "auto" }}>
                   <Avatar
-                    alt="Team Logo"
+                    alt={match.event_away_team}
                     src={match.away_team_logo}
                     sx={{ width: 100, height: 100 }}
                   />
