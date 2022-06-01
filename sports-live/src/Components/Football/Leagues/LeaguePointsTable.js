@@ -73,7 +73,7 @@ function LeaguePointsTable({ league }) {
           {pointsTable ? pointsTable.map((row, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell align="center">{row.standing_place}</StyledTableCell>
-              <StyledTableCell align="center">{row.standing_place}</StyledTableCell>
+              <StyledTableCell align="center">{row.standing_team}</StyledTableCell>
               <StyledTableCell align="center">{row.standing_P}</StyledTableCell>
               <StyledTableCell align="center">{row.standing_W}</StyledTableCell>
               <StyledTableCell align="center">{row.standing_D}</StyledTableCell>
