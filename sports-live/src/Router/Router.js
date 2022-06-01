@@ -35,13 +35,13 @@ function Router() {
           <Route path="Teams" element={<Teams />}>
             <Route path=":name" element={<TeamInfo />}></Route>
           </Route>
-          <Route path="Players" element={<Player />} />
+          <Route path="Player" element={<Player />} />
         </Route>
 
         <Route path="Football" element={<Football />}>
           <Route path="LiveScore" element={<LiveScoreFootball />} />
           <Route path="Rankings" element={<RankingsFootball />} />
-          <Route path="Series" element={<LeaguesFootball />} >
+          <Route path="Series" element={<LeaguesFootball />}>
             <Route path=":name" element={<LeagueInfo />}></Route>
           </Route>
           <Route path="Gallery" element={<GalleryFootball />} />
