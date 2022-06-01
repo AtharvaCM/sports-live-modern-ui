@@ -25,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function LiveScoreFootball() {
-  //const [matches, setMatches] = useState(null);
+  
   const [liveMatches,setliveMatches] = useState(null);
 
   useEffect(() => {
@@ -108,19 +108,20 @@ function LiveScoreFootball() {
                     >
                       <CampaignOutlinedIcon /> League : {match.league_name}
                     </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      sx={{ display: "flex", alignItems: "center " }}
-                    >
-                      <PlaceOutlinedIcon /> Venue : {match.event_stadium}
-                    </Typography>
+                    
                     <Typography
                       variant="subtitle1"
                       gutterBottom
                       sx={{ display: "flex", alignItems: "center " }}
                     >
                       <OutlinedFlagIcon /> Season : {match.league_season}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      sx={{ display: "flex", alignItems: "center " }}
+                    >
+                      <PlaceOutlinedIcon /> Venue : {match.event_stadium}
                     </Typography>
                   </Box>
                 </Grid>
