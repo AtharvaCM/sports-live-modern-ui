@@ -113,7 +113,7 @@ function Cricket() {
           >
             <Grid container spacing={1} align="center">
               <Grid item xs={6} md={12}>
-                <h2>Featured match</h2>
+                <Typography variant="h2">Featured match</Typography>
               </Grid>
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
@@ -126,10 +126,10 @@ function Cricket() {
               </Grid>
 
               <Grid item xs={6} md={4}>
-                <h4 style={{ marginBottom: "5px" }}>
+                <Typography variant="h4" style={{ marginBottom: "5px" }}>
                   {" "}
                   Date : {featuredMatches[0].date}
-                </h4>
+                </Typography>
                 <Item>
                   {featuredMatches[0].teams[0]} :{" "}
                   {featuredMatches[0].score[0].r} /{" "}
@@ -140,9 +140,9 @@ function Cricket() {
                   {featuredMatches[0].score[1].w} (
                   {featuredMatches[0].score[1].o})
                 </Item>
-                <h4 style={{ marginTop: "5px" }}>
+                <Typography variant="h4" style={{ marginTop: "5px" }}>
                   {featuredMatches[0].status}
-                </h4>
+                </Typography>
               </Grid>
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>

@@ -9,8 +9,8 @@ import axios from "axios";
 
 import { COLORS } from "../../Constants/Theme";
 
-// import Container from "@mui/material/Container";
-import { Container } from "react-bootstrap";
+import Container from "@mui/material/Container";
+// import { Container } from "react-bootstrap";
 
 const URL =
   "https://api.unsplash.com/search/photos?page=1&per_page=30&query=cricket&client_id=J-xAGd8R7QHuRsKiznwL6R-yhGK8-X64-Oj0HG1A9Q0";

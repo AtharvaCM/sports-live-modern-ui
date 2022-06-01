@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import FootballSubNavbar from "../../Components/Football/FootballSubNavbar";
 
-
-
 import { Parallax } from "react-parallax";
 import Avatar from "@mui/material/Avatar";
 import { Container } from "react-bootstrap";
@@ -23,9 +21,6 @@ import { CardActionArea } from "@mui/material";
 import { COLORS } from "../../Constants/Theme";
 import footballNewsApi from "../../API/Football/FootballNewsApi";
 import FootballLiveScoreApi from "../../API/Football/FootballLiveScoreApi";
-
-
-
 
 const insideStyles = {
   padding: 20,
@@ -53,9 +48,7 @@ const Item = styled(Paper)(({ theme }) => ({
   fontSize: "20px",
 }));
 
-
 function Football() {
-
   const location = useLocation();
   const [newsArticles, setNewsArticles] = useState(null);
   const [displayInfo, setDisplayInfo] = useState(true);
@@ -87,7 +80,6 @@ function Football() {
       bgImage={require("../../Assets/Images/Football/footballCover1.jpg")}
       bgImageAlt="CricInfo Img"
       strength={-200}
-
     >
       <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}>
         <div style={insideStyles}>Football</div>
@@ -122,7 +114,7 @@ function Football() {
           >
             <Grid container spacing={1} align="center">
               <Grid item xs={6} md={12}>
-                <h2>Featured match</h2>
+                <Typography variant="h4">Featured match</Typography>
               </Grid>
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
@@ -131,22 +123,34 @@ function Football() {
                   src={featuredMatches[0].home_team_logo}
                   sx={{ width: 100, height: 100 }}
                 />
-                {featuredMatches[0].event_home_team}
+                <Typography variant="h6" gutterBottom>
+                  {featuredMatches[0].event_home_team}
+                </Typography>
               </Grid>
 
               <Grid item xs={6} md={4}>
-                <h5 style={{ marginBottom: "5px"}}>
-                   {" "}
-                  Date : {featuredMatches[0].event_date} 
-                </h5>
-                
-                  <Item sx={{ mt: 1.5, height: 60, width: 100 }}>
-                    <Typography component="h5" sx={{ fontSize: '1.7rem', fontWeight: 'bold' }}>{featuredMatches[0].event_ft_result}</Typography>
-                  </Item>
-                
-                <h5 style={{ marginTop: "5px" }}>
-                 Status : {featuredMatches[0].event_status}
-                </h5>
+                <Typography variant="h5" style={{ marginBottom: "5px" }}>
+                  {" "}
+                  Date : {featuredMatches[0].event_date}
+                </Typography>
+
+                <Item sx={{ mt: 1.5, py: 3, width: 100 }}>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      fontWeight: "bold",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {featuredMatches[0].event_ft_result}
+                  </Typography>
+                </Item>
+
+                <Typography variant="h5" style={{ marginTop: "5px" }}>
+                  Status : {featuredMatches[0].event_status}
+                </Typography>
               </Grid>
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
@@ -155,7 +159,9 @@ function Football() {
                   src={featuredMatches[0].away_team_logo}
                   sx={{ width: 100, height: 100 }}
                 />
-                {featuredMatches[0].event_away_team}
+                <Typography variant="h6" gutterBottom>
+                  {featuredMatches[0].event_away_team}
+                </Typography>
               </Grid>
             </Grid>
           </Box>
@@ -166,65 +172,90 @@ function Football() {
 
   const LatestMatchContainer = () => (
     <>
-      <h2 style={{ textAlign: "center", marginBottom: "40px" }}>
+      <Typography
+        variant="h4"
+        style={{ textAlign: "center", marginBottom: "40px" }}
+      >
         Latest Matches
-      </h2>
+      </Typography>
       {featuredMatches === null
         ? null
         : featuredMatches.slice(1, 5).map((match, index) => (
-          <Box
-            sx={{ flexGrow: 1 }}
-            style={{
-              width: "80vw",
-              backgroundColor: "#FFFFFF",
-              // marginTop: "10px",
-              borderBottom: "1px solid gray",
-            }}
-            className="card-hover"
-            key={index}
-          >
-            <Grid
-              container
-              // spacing={{ xs: 1, md: 1 }}
-              columns={{ xs: 4, sm: 8, md: 12 }}
-              sx={{
-                paddingTop: "1rem",
-                paddingBottom: "1rem",
+            <Box
+              sx={{ flexGrow: 1 }}
+              style={{
+                width: "80vw",
+                backgroundColor: "#FFFFFF",
+                // marginTop: "10px",
+                borderBottom: "1px solid gray",
               }}
+              className="card-hover"
+              key={index}
             >
-              <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
-                <Avatar
-                  alt="Team Logo"
-                  src={match.home_team_logo}
-                  sx={{ width: 80, height: 80, ml: 2 }}
-                />
-                <span>{match.event_home_team}</span>
-              </Grid>
-
-              <Grid item xs={2} sm={4} md={4} justifyContent='center' display='flex'>
-                <Item sx={{ mt: 1.4, height: 60, width: 100 }}>
-                  <Typography component="h5" sx={{ fontSize: '1.6rem', fontWeight: 'bold' }}>{match.event_ft_result}</Typography>
-                </Item>
-              </Grid>
-
               <Grid
-                item
-                xs={2}
-                sm={4}
-                md={4}
-                align="right"
-                style={verticalAlignStyle}
+                container
+                // spacing={{ xs: 1, md: 1 }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
+                sx={{
+                  paddingTop: "1rem",
+                  paddingBottom: "1rem",
+                }}
               >
-                <span>{match.event_away_team}</span>
-                <Avatar
-                  alt="Team Logo"
-                  src={match.away_team_logo}
-                  sx={{ width: 80, height: 80, mr: 2 }}
-                />
+                <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
+                  <Avatar
+                    alt="Team Logo"
+                    src={match.home_team_logo}
+                    sx={{ width: 80, height: 80, ml: 2 }}
+                  />
+                  <span>{match.event_home_team}</span>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={2}
+                  sm={4}
+                  md={4}
+                  justifyContent="center"
+                  display="flex"
+                >
+                  <Item
+                    sx={{
+                      mt: 1.4,
+                      width: 100,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {match.event_ft_result}
+                    </Typography>
+                  </Item>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={2}
+                  sm={4}
+                  md={4}
+                  align="right"
+                  style={verticalAlignStyle}
+                >
+                  <span>{match.event_away_team}</span>
+                  <Avatar
+                    alt="Team Logo"
+                    src={match.away_team_logo}
+                    sx={{ width: 80, height: 80, mr: 2 }}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        ))}
+            </Box>
+          ))}
     </>
   );
 
