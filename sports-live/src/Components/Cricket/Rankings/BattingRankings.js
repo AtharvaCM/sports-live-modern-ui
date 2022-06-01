@@ -6,9 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Avatar, Typography } from "@mui/material";
 
 import { StyledTableCell, StyledTableRow } from "../../../Constants/Styles";
-import { Avatar, Typography } from "@mui/material";
 
 function BattingRankings({ rows, matchType }) {
   //   console.log("rows", rows);

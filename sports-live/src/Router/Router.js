@@ -17,6 +17,7 @@ import NewsFootball from "../Pages/Football/NewsFootball";
 import RankingsFootball from "../Pages/Football/RankingsFootball";
 import LeaguesFootball from "../Pages/Football/LeaguesFootball";
 import HomePage from "../Pages/HomePage";
+import MatchSummaryFootball from "../Pages/Football/MatchSummaryFootball";
 import TeamInfo from "../Components/Cricket/Teams/TeamInfo";
 import LeagueInfo from "../Components/Football/Leagues/LeagueInfo";
 
@@ -46,6 +47,7 @@ function Router() {
           </Route>
           <Route path="Gallery" element={<GalleryFootball />} />
           <Route path="News" element={<NewsFootball />} />
+          <Route path="MatchSummary" element={<MatchSummaryFootball />} />
         </Route>
       </Route>
     </Routes>

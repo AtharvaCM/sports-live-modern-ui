@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
 import Avatar from "@mui/material/Avatar";
@@ -50,6 +50,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Cricket() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [newsArticles, setNewsArticles] = useState(null);
   const [displayInfo, setDisplayInfo] = useState(true);
   const [featuredMatches, setFeaturedMatches] = useState(null);
@@ -113,7 +115,7 @@ function Cricket() {
           >
             <Grid container spacing={1} align="center">
               <Grid item xs={6} md={12}>
-                <Typography variant="h2">Featured match</Typography>
+                <Typography variant="h4">Featured match</Typography>
               </Grid>
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
@@ -122,11 +124,13 @@ function Cricket() {
                   src={featuredMatches[0].teamInfo[0].img}
                   sx={{ width: 100, height: 100 }}
                 />
-                {featuredMatches[0].teams[0]}
+                <Typography variant="h6">
+                  {featuredMatches[0].teams[0]}
+                </Typography>
               </Grid>
 
               <Grid item xs={6} md={4}>
-                <Typography variant="h4" style={{ marginBottom: "5px" }}>
+                <Typography variant="h5" style={{ marginBottom: "5px" }}>
                   {" "}
                   Date : {featuredMatches[0].date}
                 </Typography>
@@ -140,7 +144,7 @@ function Cricket() {
                   {featuredMatches[0].score[1].w} (
                   {featuredMatches[0].score[1].o})
                 </Item>
-                <Typography variant="h4" style={{ marginTop: "5px" }}>
+                <Typography variant="h5" style={{ marginTop: "5px" }}>
                   {featuredMatches[0].status}
                 </Typography>
               </Grid>
@@ -162,9 +166,12 @@ function Cricket() {
 
   const LatestMatchContainer = () => (
     <>
-      <h2 style={{ textAlign: "center", marginBottom: "40px" }}>
+      <Typography
+        variant="h4"
+        style={{ textAlign: "center", marginBottom: "40px" }}
+      >
         Latest Matches
-      </h2>
+      </Typography>
       {featuredMatches === null
         ? null
         : featuredMatches.slice(1, 5).map((match, index) => (
@@ -186,6 +193,12 @@ function Cricket() {
                 sx={{
                   paddingTop: "1rem",
                   paddingBottom: "1rem",
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
+                }}
+                onClick={() => {
+                  navigate("/Cricket/LiveScore");
                 }}
               >
                 <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
