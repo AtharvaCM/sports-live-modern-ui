@@ -135,18 +135,18 @@ function Football() {
               </Grid>
 
               <Grid item xs={6} md={4}>
-                <h4 style={{ marginBottom: "5px" }}>
+                <h5 style={{ marginBottom: "5px"}}>
                    {" "}
                   Date : {featuredMatches[0].event_date} 
-                </h4>
+                </h5>
                 
-                  <Item sx={{ mt: 1.4, height: 40, width: 100 }}>
-                    <Typography component="h5" sx={{ fontSize: '1.6rem', fontWeight: 'bold' }}>{featuredMatches[0].event_ft_result}</Typography>
+                  <Item sx={{ mt: 1.5, height: 60, width: 100 }}>
+                    <Typography component="h5" sx={{ fontSize: '1.7rem', fontWeight: 'bold' }}>{featuredMatches[0].event_ft_result}</Typography>
                   </Item>
                 
-                <h4 style={{ marginTop: "5px" }}>
+                <h5 style={{ marginTop: "5px" }}>
                  Status : {featuredMatches[0].event_status}
-                </h4>
+                </h5>
               </Grid>
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
@@ -202,7 +202,7 @@ function Football() {
               </Grid>
 
               <Grid item xs={2} sm={4} md={4} justifyContent='center' display='flex'>
-                <Item sx={{ mt: 1.4, height: 40, width: 100 }}>
+                <Item sx={{ mt: 1.4, height: 60, width: 100 }}>
                   <Typography component="h5" sx={{ fontSize: '1.6rem', fontWeight: 'bold' }}>{match.event_ft_result}</Typography>
                 </Item>
               </Grid>

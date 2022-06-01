@@ -138,8 +138,8 @@ function LiveScoreFootball() {
                 </Grid>
 
                 <Grid item xs={6} md={4}>
-                  <Item sx={{ mt: 3 ,height:40,width:100}} >
-                    <Typography sx={{mt:0.5,fontWeight:'bold'}} variant="h5">{match.event_ft_result}</Typography>
+                  <Item sx={{ mt: 3 ,height:50,width:100}} >
+                    <Typography sx={{fontWeight:'bold'}} variant="h5">{match.event_ft_result}</Typography>
                   </Item>
                   <Typography variant="h6" sx={{ mt: 2 }}>
                     {match.event_status}
