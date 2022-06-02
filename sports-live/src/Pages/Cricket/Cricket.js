@@ -143,7 +143,9 @@ function Cricket() {
                   src={featuredMatches[0].teamInfo[1].img}
                   sx={{ width: 100, height: 100 }}
                 />
-                {featuredMatches[0].teams[1]}
+                <Typography variant="h6">
+                  {featuredMatches[0].teams[1]}
+                </Typography>
               </Grid>
             </Grid>
           </Box>
