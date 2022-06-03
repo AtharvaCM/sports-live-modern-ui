@@ -105,7 +105,7 @@ function LiveScore() {
 
                 <Grid item xs={6} md={4} sx={{ my: "auto" }}>
                   <Avatar
-                    alt="Team Logo"
+                    alt={match.teams[0]}
                     src={match.teamInfo[0].img}
                     sx={{ width: 100, height: 100 }}
                   />
@@ -116,10 +116,15 @@ function LiveScore() {
 
                 <Grid item xs={6} md={4}>
                   <Item sx={{ mt: 3 }}>
-                    {match.teamInfo[0].shortname} : {match.score[0].r} /{" "}
-                    {match.score[0].w} ({match.score[0].o}) <br />
-                    {match.teamInfo[1].shortname} : {match.score[1].r} /{" "}
-                    {match.score[1].w} ({match.score[1].o})
+                    {match.teamInfo[0].shortname} :
+                    {match.score[0] === undefined
+                      ? null
+                      : `${match.score[0].r} / ${match.score[0].w} (${match.score[0].o})`}
+                    <br />
+                    {match.teamInfo[1].shortname} :
+                    {match.score[1] === undefined
+                      ? null
+                      : `${match.score[1].r} / ${match.score[1].w} (${match.score[1].o})`}
                   </Item>
                   <Typography variant="h6" sx={{ mt: 2 }}>
                     {match.status}
@@ -128,7 +133,7 @@ function LiveScore() {
 
                 <Grid item xs={6} md={4} sx={{ my: "auto" }}>
                   <Avatar
-                    alt="Team Logo"
+                    alt={match.teams[1]}
                     src={match.teamInfo[1].img}
                     sx={{ width: 100, height: 100 }}
                   />
