@@ -51,7 +51,7 @@ function TeamPlayers({ team }) {
                     <Tooltip title="Click to view details" placement="top">
                       <CardActionArea
                         component={Link}
-                        to={player.id}
+                        to="/Cricket/Player"
                         state={{ player: player }}
                       >
                         <CardContent>

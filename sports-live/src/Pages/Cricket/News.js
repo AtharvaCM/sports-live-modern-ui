@@ -38,8 +38,7 @@ function News() {
 
   const parallaxContainer = () => (
     <Parallax
-      blur={{ min: -15, max: 10 }}
-      bgImage={require("../../Assets/Images/Cricket/cricInfoPage.jpg")}
+      bgImage="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1605&q=80"
       bgImageAlt="CricInfo Img"
       strength={-200}
     >

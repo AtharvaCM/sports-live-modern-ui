@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
 import Avatar from "@mui/material/Avatar";
@@ -20,16 +20,7 @@ import { CardActionArea } from "@mui/material";
 import CricketSubNavbar from "../../Components/Cricket/CricketSubNavbar";
 import { COLORS } from "../../Constants/Theme";
 import NewsAPI from "../../API/Cricket/NewsAPI";
-
-const insideStyles = {
-  padding: 20,
-  position: "absolute",
-  top: "40%",
-  left: "20%",
-  fontSize: "4rem",
-  color: "white",
-  transform: "translate(-50%,-50%)",
-};
+import CurrentMatchesAPI from "../../API/Cricket/CurrentMatchesAPI";
 
 const verticalAlignStyle = {
   display: "flex",
@@ -49,8 +40,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Cricket() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [newsArticles, setNewsArticles] = useState(null);
   const [displayInfo, setDisplayInfo] = useState(true);
+  const [featuredMatches, setFeaturedMatches] = useState(null);
 
   useEffect(() => {
     console.log("location", location.pathname);
@@ -63,18 +57,22 @@ function Cricket() {
         setNewsArticles(data.articles);
       })
       .catch((err) => console.log(err));
+    // Call the FeaturedMatches API
+    CurrentMatchesAPI()
+      .then((response) => {
+        setFeaturedMatches(response.data);
+      })
+      .catch((err) => console.log(err));
   }, [location]);
 
   const parallaxContainer = () => (
     <Parallax
       blur={{ min: -15, max: 10 }}
-      bgImage={require("../../Assets/Images/Cricket/cricInfoPage.jpg")}
+      bgImage="https://wallpaperaccess.com/full/1088580.jpg"
       bgImageAlt="CricInfo Img"
       strength={-200}
     >
-      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}>
-        <div style={insideStyles}>Cricket</div>
-      </div>
+      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}></div>
     </Parallax>
   );
 
@@ -95,160 +93,144 @@ function Cricket() {
         }}
       >
         {/* featured match section */}
+        {featuredMatches === null ? null : (
+          <Box
+            sx={{ flexGrow: 1 }}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="40vh"
+          >
+            <Grid container spacing={1} align="center">
+              <Grid item xs={6} md={12}>
+                <Typography variant="h4">Featured match</Typography>
+              </Grid>
 
-        <Box
-          sx={{ flexGrow: 1 }}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="40vh"
-        >
-          <Grid container spacing={1} align="center">
-            <Grid item xs={6} md={12}>
-              <h2>Featured match</h2>
-            </Grid>
+              <Grid item xs={6} md={4} sx={{ my: "auto" }}>
+                <Avatar
+                  alt="Team Logo"
+                  src={featuredMatches[0].teamInfo[0].img}
+                  sx={{ width: 100, height: 100 }}
+                />
+                <Typography variant="h6">
+                  {featuredMatches[0].teams[0]}
+                </Typography>
+              </Grid>
 
-            <Grid item xs={6} md={4} sx={{ my: "auto" }}>
-              <Avatar
-                alt="Remy Sharp"
-                src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-                sx={{ width: 100, height: 100 }}
-              />
-              India
-            </Grid>
+              <Grid item xs={6} md={4}>
+                <Typography variant="h5" style={{ marginBottom: "5px" }}>
+                  {" "}
+                  Date : {featuredMatches[0].date}
+                </Typography>
+                <Item>
+                  {featuredMatches[0].teams[0]} :{" "}
+                  {featuredMatches[0].score[0].r} /{" "}
+                  {featuredMatches[0].score[0].w} (
+                  {featuredMatches[0].score[0].o}) <br />
+                  {featuredMatches[0].teams[1]} :{" "}
+                  {featuredMatches[0].score[1].r} /{" "}
+                  {featuredMatches[0].score[1].w} (
+                  {featuredMatches[0].score[1].o})
+                </Item>
+                <Typography variant="h5" style={{ marginTop: "5px" }}>
+                  {featuredMatches[0].status}
+                </Typography>
+              </Grid>
 
-            <Grid item xs={6} md={4}>
-              <h4 style={{ marginBottom: "5px" }}> Date : 25/8/2022</h4>
-              <Item>
-                IND : 350 / 15 (50) <br />
-                RSA : 349 / 10 (50)
-              </Item>
-              <h4 style={{ marginTop: "5px" }}>Indian won by 10 wickets </h4>
+              <Grid item xs={6} md={4} sx={{ my: "auto" }}>
+                <Avatar
+                  alt="Team Logo"
+                  src={featuredMatches[0].teamInfo[1].img}
+                  sx={{ width: 100, height: 100 }}
+                />
+                <Typography variant="h6">
+                  {featuredMatches[0].teams[1]}
+                </Typography>
+              </Grid>
             </Grid>
-
-            <Grid item xs={6} md={4} sx={{ my: "auto" }}>
-              <Avatar
-                alt="Remy Sharp"
-                src="http://geo5.net/imagens/Bandeira-da-Africa-do-Sul.png"
-                sx={{ width: 100, height: 100 }}
-              />
-              India
-            </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        )}
       </div>
     </Parallax>
   );
 
   const LatestMatchContainer = () => (
     <>
-      <h2 style={{ textAlign: "center", marginBottom: "40px" }}>
+      <Typography
+        variant="h4"
+        style={{ textAlign: "center", marginBottom: "40px" }}
+      >
         Latest Matches
-      </h2>
-      <Box
-        sx={{ flexGrow: 1 }}
-        style={{
-          width: "80vw",
-          backgroundColor: "#FFFFFF",
-          marginTop: "10px",
-          borderBottom: "1px solid gray",
-        }}
-        className="card-hover"
-      >
-        <Grid
-          container
-          // spacing={{ xs: 1, md: 1 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-          sx={{
-            paddingTop: "1rem",
-            paddingBottom: "1rem",
-          }}
-        >
-          <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-              sx={{ width: 80, height: 80, ml: 2 }}
-            />
-            <span>India</span>
-          </Grid>
+      </Typography>
+      {featuredMatches === null
+        ? null
+        : featuredMatches.slice(1, 5).map((match, index) => (
+            <Box
+              sx={{ flexGrow: 1 }}
+              style={{
+                width: "80vw",
+                backgroundColor: "#FFFFFF",
+                // marginTop: "10px",
+                borderBottom: "1px solid gray",
+              }}
+              className="card-hover"
+              key={index}
+            >
+              <Grid
+                container
+                // spacing={{ xs: 1, md: 1 }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
+                sx={{
+                  paddingTop: "1rem",
+                  paddingBottom: "1rem",
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
+                }}
+                onClick={() => {
+                  navigate("/Cricket/LiveScore");
+                }}
+              >
+                <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
+                  <Avatar
+                    alt="Team Logo"
+                    src={match.teamInfo[0].img}
+                    sx={{ width: 80, height: 80, ml: 2 }}
+                  />
+                  <span>{match.teams[0]}</span>
+                </Grid>
 
-          <Grid item xs={2} sm={4} md={4} marginY="auto">
-            <Item>
-              <div>IND : 350 / 15 (50)</div>
-              <div>RSA : 349 / 10 (50)</div>
-            </Item>
-          </Grid>
+                <Grid item xs={2} sm={4} md={4} marginY="auto">
+                  <Item>
+                    <div>
+                      {match.teams[0]} : {match.score[0].r} / {match.score[0].w}{" "}
+                      ({match.score[0].o})
+                    </div>
+                    <div>
+                      {match.teams[1]} : {match.score[1].r} / {match.score[1].w}{" "}
+                      ({match.score[1].o})
+                    </div>
+                  </Item>
+                </Grid>
 
-          <Grid
-            item
-            xs={2}
-            sm={4}
-            md={4}
-            align="right"
-            style={verticalAlignStyle}
-          >
-            <span>India</span>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-              sx={{ width: 80, height: 80, mr: 2 }}
-            />
-          </Grid>
-        </Grid>
-      </Box>
-
-      <Box
-        sx={{ flexGrow: 1 }}
-        style={{
-          width: "80vw",
-          backgroundColor: "#FFFFFF",
-          marginBottom: "25px",
-        }}
-        className="card-hover"
-      >
-        <Grid
-          container
-          // spacing={{ xs: 1, md: 1 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-          sx={{
-            paddingTop: "1rem",
-            paddingBottom: "1rem",
-          }}
-        >
-          <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-              sx={{ width: 80, height: 80, ml: 2 }}
-            />
-            <span>India</span>
-          </Grid>
-
-          <Grid item xs={2} sm={4} md={4} marginY="auto">
-            <Item>
-              <div>IND : 350 / 15 (50)</div>
-              <div>RSA : 349 / 10 (50)</div>
-            </Item>
-          </Grid>
-
-          <Grid
-            item
-            xs={2}
-            sm={4}
-            md={4}
-            align="right"
-            style={verticalAlignStyle}
-          >
-            <span>India</span>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"
-              sx={{ width: 80, height: 80, mr: 2 }}
-            />
-          </Grid>
-        </Grid>
-      </Box>
+                <Grid
+                  item
+                  xs={2}
+                  sm={4}
+                  md={4}
+                  align="right"
+                  style={verticalAlignStyle}
+                >
+                  <span>{match.teams[1]}</span>
+                  <Avatar
+                    alt="Team Logo"
+                    src={match.teamInfo[1].img}
+                    sx={{ width: 80, height: 80, mr: 2 }}
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+          ))}
     </>
   );
 
@@ -256,7 +238,7 @@ function Cricket() {
     <>
       <Parallax
         blur={{ min: -15, max: 10 }}
-        bgImage={require("../../Assets/Images/Cricket/cricInfoPage.jpg")}
+        bgImage="https://static.dezeen.com/uploads/2018/11/lords-cricket-ground-wilkinson-eyre_dezeen_2364_col_3.jpg"
         bgImageAlt="CricInfo Img"
         strength={-200}
       >
@@ -330,7 +312,7 @@ function Cricket() {
 
   return (
     <>
-      <CricketSubNavbar></CricketSubNavbar>
+      <CricketSubNavbar />
       <Outlet />
       {displayInfo === true ? (
         <>

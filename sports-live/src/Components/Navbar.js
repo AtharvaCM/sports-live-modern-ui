@@ -138,7 +138,7 @@ const Navbar = () => {
                   textDecoration: "none",
                   color:
                     pathName.includes(`/${page}`) === true
-                      ? COLORS.colorDark
+                      ? "darkblue"
                       : COLORS.colorLight,
                 }}
               >
@@ -149,7 +149,7 @@ const Navbar = () => {
                     mx: 2,
                     color:
                       pathName.includes(`/${page}`) === true
-                        ? COLORS.colorDark
+                        ? "darkblue"
                         : COLORS.colorLight,
                     display: "block",
                   }}
