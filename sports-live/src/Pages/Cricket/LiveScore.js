@@ -29,6 +29,7 @@ function LiveScore() {
     // Call the match API
     CurrentMatchesAPI()
       .then((response) => {
+        console.log(response.data)
         setMatches(response.data);
       })
       .catch((err) => console.log(err));
@@ -39,6 +40,7 @@ function LiveScore() {
       {matches === null
         ? null
         : matches.map((match, index) => (
+         
             <Box
               sx={{
                 flexGrow: 1,
@@ -116,10 +118,10 @@ function LiveScore() {
 
                 <Grid item xs={6} md={4}>
                   <Item sx={{ mt: 3 }}>
-                    {match.teamInfo[0].shortname} : {match.score[0].r} /{" "}
-                    {match.score[0].w} ({match.score[0].o}) <br />
-                    {match.teamInfo[1].shortname} : {match.score[1].r} /{" "}
-                    {match.score[1].w} ({match.score[1].o})
+                    {match.teamInfo[0].shortname} :  {match.score[0]?match.score[0].r:'NA'} /{" "}
+                    {match.score[0].w} ({match.score[0]?match.score[0].o:'NA'}) <br />
+                    {match.teamInfo[1].shortname} : {match.score[1]?match.score[1].r:'NA'} /{" "}
+                    {match.score[1]?match.score[1].w:'NA'} ({match.score[1]?match.score[1].o:'NA'})
                   </Item>
                   <Typography variant="h6" sx={{ mt: 2 }}>
                     {match.status}
