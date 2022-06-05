@@ -1,52 +1,43 @@
-import React, { useEffect, useState } from "react";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
+import React from "react";
+import SportsImage from '../Assets/Images/sports-tools1.jpg'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import HomePageItems from "./HomePageItems";
 
-import myVideo from "../Assets/Videos/sports.mp4";
 
 function HomePage() {
-  const [loading, setLoading] = useState(true);
 
-  const handleVideoLoad = () => {
-    console.log("Video is loaded");
-    setLoading(false);
-  };
+  const STYLE = {
+    divStyle: {
+      marginTop: '-32px',
+      backgroundImage: `url(${SportsImage})`,
+      backgroundRepeat: 'no-repeat',
+      minheight: '100vh',
+      backgroundSize: 'cover',
+    },
+    h1Style: {
+      display: 'flex',
+      justifyContent: 'center',
+      color: 'white',
+      textAlign: 'center',
+      fontSize: '3rem',
+      height: '50vh',
+      alignItems: 'center'
+    },
 
-  useEffect(() => {}, []);
+  }
 
   return (
-    <Container maxWidth="" className="landing-container">
-      <div className="landing-video-container" style={{ height: "inherit" }}>
-        <Box sx={{ bgcolor: "#cfe8fc", height: "inherit" }}>
-          {loading === true ? (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "inherit",
-              }}
-            >
-              <CircularProgress />
-            </Box>
-          ) : null}
-          <>
-            <video
-              autoPlay
-              loop
-              muted
-              className="landing-video"
-              width="100"
-              onLoadedData={handleVideoLoad}
-              style={{ display: `${loading === true ? "none" : "block"}` }}
-            >
-              <source src={myVideo} type="video/mp4" />
-            </video>
-          </>
-        </Box>
+    <div style={STYLE.divStyle}>
+      <h1 style={STYLE.h1Style}>
+        <span style={{ marginTop: '30px' }}>Welcome to Sports<span style={{ color: 'orange' }}>Live </span></span>
+      </h1>
+      <div style={{textAlign:'center'}}>
+        <KeyboardArrowDownIcon sx={{ color: 'white', fontSize: '60', height: '4rem', width: '4rem', textAlign: 'center' }} />
       </div>
-    </Container>
+      <HomePageItems />
+    </div>
+
+
   );
 }
 
