@@ -17,7 +17,7 @@ function HomePageItems() {
             alignItems="center"
             minHeight="40vh"
             >
-                <Grid container spacing={1} align="center"  marginBottom={10} marginTop={3}>
+                <Grid container spacing={1} align="center"  marginBottom={10} marginTop={15}>
                     <Grid item xs={6} md={6}>
                         <Card sx={{ maxWidth: 400, height: 450, background: 'rgb(0,0,0,0.8)', color: 'white' }} >
                             <CardMedia

@@ -29,9 +29,9 @@ function HomePage() {
   return (
     <div style={STYLE.divStyle}>
       <h1 style={STYLE.h1Style}>
-        <span style={{ marginTop: '30px' }}>Welcome to Sports<span style={{ color: 'orange' }}>Live </span></span>
+        <span style={{ marginTop: '100px' }}>Welcome to Sports<span style={{ color: 'orange' }}>Live </span></span>
       </h1>
-      <div style={{textAlign:'center'}}>
+      <div style={{textAlign:'center',marginBottom:'50px'}}>
         <KeyboardArrowDownIcon sx={{ color: 'white', fontSize: '60', height: '4rem', width: '4rem', textAlign: 'center' }} />
       </div>
       <HomePageItems />
