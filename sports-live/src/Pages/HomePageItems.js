@@ -6,63 +6,75 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Tooltip } from '@mui/material';
 
 function HomePageItems() {
     return (
         <div >
             <Box sx={{ flexGrow: 1 }}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="40vh"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                minHeight="50vh"
             >
-                <Grid container spacing={1} align="center"  marginBottom={10} marginTop={15}>
+                <Grid container spacing={1} align="center" marginBottom={10} marginTop={15}>
                     <Grid item xs={6} md={6}>
-                        <Card sx={{ maxWidth: 400, height: 450, background: 'rgb(0,0,0,0.8)', color: 'white' }} >
-                            <CardMedia
-                                component="img"
-                                alt="green iguana"
-                                height="280"
-                                image={cricketImg}
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h4" component="div">
-                                    Cricket
-                                </Typography>
-                                <Typography variant="body2" color="#ddd">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                        <Tooltip title="Go to Cricket Section" placement="top">
+                            <Card sx={{ maxWidth: 400, height: 500, background: 'rgb(0,0,0,0.8)', color: 'white' }} >
+                                <div className="news-card">
+                                    <CardMedia
+                                        component="img"
+                                        alt="green iguana"
+                                        height="280"
+                                        image={cricketImg}
+                                        className='news-card-img'
+                                    />
+                                </div>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h4" component="div">
+                                        Cricket
+                                    </Typography>
+                                    <Typography variant="body2" color="#ddd">
+                                        Cricket is a team sport that is played outdoors. Cricket originated in England and
+                                        gradually became popular across the globe. This sport requires complete
+                                        physical fitness and athleticism to play. The sport is played between two teams
+                                        of 11 players each.
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Tooltip>
                     </Grid>
                     <Grid item xs={6} md={6}>
-                        <Card sx={{ maxWidth: 400, height: 450, background: 'rgb(0,0,0,0.8)', color: 'white' }}>
-                            <CardMedia
-                                component="img"
-                                alt="green iguana"
-                                height="280"
-                                image={footballImg}
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h4" component="div">
-                                    Football
-                                </Typography>
-                                <Typography variant="body2" color="#ddd">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                        <Tooltip title="Go to Football Section" placement="top">
+                            <Card sx={{ maxWidth: 400, height: 500, background: 'rgb(0,0,0,0.8)', color: 'white' }}>
+                                <div className="news-card">
+                                    <CardMedia
+                                        component="img"
+                                        alt="green iguana"
+                                        height="280"
+                                        image={footballImg}
+                                        className='news-card-img'
+                                    />
+                                </div>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h4" component="div">
+                                        Football
+                                    </Typography>
+                                    <Typography variant="body2" color="#ddd">
+                                        Football is the most popular sport worldwide. It is also called “soccer” in some countries. It
+                                        is an outdoor game that requires absolute athleticism as players have to hustle and run
+                                        across the field with the ball throughout the game. The name of the sport was derived by
+                                        the way it is played.
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Tooltip>
                     </Grid>
                 </Grid>
 
             </Box>
-
-
-
         </div>
+
     )
 }
 

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SportsImage from '../Assets/Images/sports-tools1.jpg'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import HomePageItems from "./HomePageItems";
+import { Collapse } from "@mui/material";
 
 
 function HomePage() {
@@ -26,15 +27,30 @@ function HomePage() {
 
   }
 
+  const [checked, setChecked] = useState(false)
+
+  useEffect(() => {
+    setChecked(true);
+  }, [])
+
   return (
     <div style={STYLE.divStyle}>
-      <h1 style={STYLE.h1Style}>
-        <span style={{ marginTop: '100px' }}>Welcome to Sports<span style={{ color: 'orange' }}>Live </span></span>
+      <h1 style={STYLE.h1Style} >
+        <Collapse
+          in={checked}
+          {...(checked ? { timeout: 1000 } : {})}
+          collapseHeight={55}
+        >
+          <span style={{ marginTop: '100px' }}>Welcome to Sports<span style={{ color: 'orange' }}>Live </span></span>
+        </Collapse>
       </h1>
-      <div style={{textAlign:'center',marginBottom:'50px'}}>
+
+      <div style={{ textAlign: 'center', marginBottom: '50px' }} id="Header">
         <KeyboardArrowDownIcon sx={{ color: 'white', fontSize: '60', height: '4rem', width: '4rem', textAlign: 'center' }} />
       </div>
-      <HomePageItems />
+
+      <HomePageItems/>
+
     </div>
 
 
