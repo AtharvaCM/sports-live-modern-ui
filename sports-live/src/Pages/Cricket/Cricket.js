@@ -18,6 +18,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { CardActionArea } from "@mui/material";
 
 import CricketSubNavbar from "../../Components/Cricket/CricketSubNavbar";
+import Spinner from "../../Components/Spinner";
 import { COLORS } from "../../Constants/Theme";
 import NewsAPI from "../../API/Cricket/NewsAPI";
 import CurrentMatchesAPI from "../../API/Cricket/CurrentMatchesAPI";
@@ -93,13 +94,22 @@ function Cricket() {
         }}
       >
         {/* featured match section */}
-        {featuredMatches === null ? null : (
+        {featuredMatches === null ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="300px"
+          >
+            <Spinner />
+          </Box>
+        ) : (
           <Box
             sx={{ flexGrow: 1 }}
             display="flex"
             justifyContent="center"
             alignItems="center"
-            minHeight="40vh"
+            minHeight="300px"
           >
             <Grid container spacing={1} align="center">
               <Grid item xs={6} md={12}>
@@ -162,75 +172,79 @@ function Cricket() {
       >
         Latest Matches
       </Typography>
-      {featuredMatches === null
-        ? null
-        : featuredMatches.slice(1, 5).map((match, index) => (
-            <Box
-              sx={{ flexGrow: 1 }}
-              style={{
-                width: "80vw",
-                backgroundColor: "#FFFFFF",
-                // marginTop: "10px",
-                borderBottom: "1px solid gray",
+      {featuredMatches === null ? (
+        <Box display="flex" justifyContent="center">
+          <Spinner />
+        </Box>
+      ) : (
+        featuredMatches.slice(1, 5).map((match, index) => (
+          <Box
+            sx={{ flexGrow: 1 }}
+            style={{
+              width: "80vw",
+              backgroundColor: "#FFFFFF",
+              // marginTop: "10px",
+              borderBottom: "1px solid gray",
+            }}
+            className="card-hover"
+            key={index}
+          >
+            <Grid
+              container
+              // spacing={{ xs: 1, md: 1 }}
+              columns={{ xs: 4, sm: 8, md: 12 }}
+              sx={{
+                paddingTop: "1rem",
+                paddingBottom: "1rem",
+                "&:hover": {
+                  cursor: "pointer",
+                },
               }}
-              className="card-hover"
-              key={index}
+              onClick={() => {
+                navigate("/Cricket/LiveScore");
+              }}
             >
-              <Grid
-                container
-                // spacing={{ xs: 1, md: 1 }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
-                sx={{
-                  paddingTop: "1rem",
-                  paddingBottom: "1rem",
-                  "&:hover": {
-                    cursor: "pointer",
-                  },
-                }}
-                onClick={() => {
-                  navigate("/Cricket/LiveScore");
-                }}
-              >
-                <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
-                  <Avatar
-                    alt="Team Logo"
-                    src={match.teamInfo[0].img}
-                    sx={{ width: 80, height: 80, ml: 2 }}
-                  />
-                  <span>{match.teams[0]}</span>
-                </Grid>
-
-                <Grid item xs={2} sm={4} md={4} marginY="auto">
-                  <Item>
-                    <div>
-                      {match.teams[0]} : {match.score[0].r} / {match.score[0].w}{" "}
-                      ({match.score[0].o})
-                    </div>
-                    <div>
-                      {match.teams[1]} : {match.score[1].r} / {match.score[1].w}{" "}
-                      ({match.score[1].o})
-                    </div>
-                  </Item>
-                </Grid>
-
-                <Grid
-                  item
-                  xs={2}
-                  sm={4}
-                  md={4}
-                  align="right"
-                  style={verticalAlignStyle}
-                >
-                  <span>{match.teams[1]}</span>
-                  <Avatar
-                    alt="Team Logo"
-                    src={match.teamInfo[1].img}
-                    sx={{ width: 80, height: 80, mr: 2 }}
-                  />
-                </Grid>
+              <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
+                <Avatar
+                  alt="Team Logo"
+                  src={match.teamInfo[0].img}
+                  sx={{ width: 80, height: 80, ml: 2 }}
+                />
+                <span>{match.teams[0]}</span>
               </Grid>
-            </Box>
-          ))}
+
+              <Grid item xs={2} sm={4} md={4} marginY="auto">
+                <Item>
+                  <div>
+                    {match.teams[0]} : {match.score[0].r} / {match.score[0].w} (
+                    {match.score[0].o})
+                  </div>
+                  <div>
+                    {match.teams[1]} : {match.score[1].r} / {match.score[1].w} (
+                    {match.score[1].o})
+                  </div>
+                </Item>
+              </Grid>
+
+              <Grid
+                item
+                xs={2}
+                sm={4}
+                md={4}
+                align="right"
+                style={verticalAlignStyle}
+              >
+                <span>{match.teams[1]}</span>
+                <Avatar
+                  alt="Team Logo"
+                  src={match.teamInfo[1].img}
+                  sx={{ width: 80, height: 80, mr: 2 }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        ))
+      )}
     </>
   );
 
@@ -250,7 +264,11 @@ function Cricket() {
             alignItems: "center",
           }}
         >
-          {newsArticles == null ? null : (
+          {newsArticles == null ? (
+            <Box display="flex" justifyContent="center" sx={{ mx: "auto" }}>
+              <Spinner />
+            </Box>
+          ) : (
             <Box sx={{ width: "100%", mb: 5 }}>
               <Grid
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
@@ -258,7 +276,14 @@ function Cricket() {
                 container
               >
                 <Grid item xs={12} md={12}>
-                  <h2 style={{ color: COLORS.colorLight }}>Latest News</h2>
+                  <Typography
+                    variant="h4"
+                    gutterBottom
+                    style={{ color: COLORS.colorLight }}
+                    sx={{ mb: 5 }}
+                  >
+                    Latest News
+                  </Typography>
                 </Grid>
                 {newsArticles.slice(0, 3).map((newsArticle, index) => (
                   <Grid item xs={4} key={index} sx={{ mb: 5 }}>

@@ -31,6 +31,34 @@ code {
   width: 100vw !important;
 }
 
+.btn-scroll {
+  transition: 0.4s;
+  color: rgba(255, 255, 255, 0.6);
+  animation: up-down 1s ease-in-out infinite alternate-reverse both;
+}
+.btn-scroll:hover {
+  color: #ffb727;
+  cursor: pointer;
+}
+
+@-webkit-keyframes up-down {
+  0% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
 /*card hover*/
 .card-hover {
   display: block;

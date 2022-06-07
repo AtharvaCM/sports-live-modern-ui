@@ -119,7 +119,7 @@ function Football() {
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
                 <Avatar
-                  alt="Team Logo"
+                  alt={featuredMatches[0].event_home_team}
                   src={featuredMatches[0].home_team_logo}
                   sx={{ width: 100, height: 100 }}
                 />
@@ -155,7 +155,7 @@ function Football() {
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
                 <Avatar
-                  alt="Team Logo"
+                  alt={featuredMatches[0].event_away_team}
                   src={featuredMatches[0].away_team_logo}
                   sx={{ width: 100, height: 100 }}
                 />
