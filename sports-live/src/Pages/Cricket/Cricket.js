@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
 import Avatar from "@mui/material/Avatar";
 import { Container } from "react-bootstrap";
 import Card from "@mui/material/Card";
-
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import { CardActionArea } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import CricketSubNavbar from "../../Components/Cricket/CricketSubNavbar";
 import Spinner from "../../Components/Spinner";
@@ -42,6 +41,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function Cricket() {
   const location = useLocation();
   const navigate = useNavigate();
+  const featuredMatchesRef = useRef();
 
   const [newsArticles, setNewsArticles] = useState(null);
   const [displayInfo, setDisplayInfo] = useState(true);
@@ -66,14 +66,42 @@ function Cricket() {
       .catch((err) => console.log(err));
   }, [location]);
 
+  function handleDownArrowClick() {
+    // Scroll to home page items
+    featuredMatchesRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   const parallaxContainer = () => (
     <Parallax
-      blur={{ min: -15, max: 10 }}
       bgImage="https://wallpaperaccess.com/full/1088580.jpg"
       bgImageAlt="CricInfo Img"
       strength={-200}
     >
-      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}></div>
+      <div style={{ height: "500px", background: "rgba(0,0,0,0.5)" }}>
+        <Box
+          sx={{
+            height: "500px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <KeyboardArrowDownIcon
+            sx={{
+              color: "white",
+              fontSize: "60",
+              height: "6rem",
+              width: "6rem",
+              textAlign: "center",
+            }}
+            onClick={handleDownArrowClick}
+            className="btn-scroll"
+            titleAccess="Scroll Down"
+          />
+        </Box>
+      </div>
     </Parallax>
   );
 
@@ -351,6 +379,7 @@ function Cricket() {
               marginBottom: "5rem",
               borderRadius: "5px",
             }}
+            ref={featuredMatchesRef}
           >
             {featuredMatchesCarousel()}
           </div>
