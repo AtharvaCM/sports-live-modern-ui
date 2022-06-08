@@ -38,7 +38,7 @@ function HomePageItems() {
               >
                 <CardActionArea
                   component={Link}
-                  to="/Football"
+                  to="/Cricket"
                   sx={{ cursor: "pointer", textDecoration: "none" }}
                 >
                   <div className="news-card">
