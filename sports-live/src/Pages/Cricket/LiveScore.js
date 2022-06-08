@@ -11,7 +11,6 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 
 import CurrentMatchesAPI from "../../API/Cricket/CurrentMatchesAPI";
 import { COLORS } from "../../Constants/Theme";
-import Spinner from "../../Components/Spinner";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: COLORS.colorDark,
@@ -30,7 +29,6 @@ function LiveScore() {
     // Call the match API
     CurrentMatchesAPI()
       .then((response) => {
-        console.log(response.data);
         setMatches(response.data);
       })
       .catch((err) => console.log(err));
@@ -38,91 +36,94 @@ function LiveScore() {
 
   const matchesList = () => (
     <>
-      {matches === null ? (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="40vh"
-        >
-          <Spinner />
-        </Box>
-      ) : (
-        matches.map((match, index) => (
-          <Box
-            sx={{
-              flexGrow: 1,
-              width: "95vw",
-              mx: "auto",
-              mb: 4,
-            }}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="40vh"
-            key={index}
-          >
-            <Grid
-              container
-              spacing={1}
-              align="center"
+      {matches === null
+        ? null
+        : matches.map((match, index) => (
+            <Box
               sx={{
-                backgroundColor: COLORS.colorLight,
-                borderRadius: "5px",
-                pb: 2,
-                "&:hover": {
-                  boxShadow: 3,
-                },
+                flexGrow: 1,
+                width: "95vw",
+                mx: "auto",
+                mb: 4,
               }}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              minHeight="40vh"
+              key={index}
             >
               <Grid
-                item
-                xs={6}
-                md={12}
+                container
+                spacing={1}
+                align="center"
                 sx={{
-                  backgroundColor: COLORS.lineChartBorder,
-                  borderTopLeftRadius: "5px",
-                  borderTopRightRadius: "5px",
+                  backgroundColor: COLORS.colorLight,
+                  borderRadius: "5px",
+                  pb: 2,
+                  "&:hover": {
+                    boxShadow: 3,
+                  },
                 }}
               >
-                <Typography variant="h5" gutterBottom>
-                  {match.name}
-                </Typography>
-                <Box
+                <Grid
+                  item
+                  xs={6}
+                  md={12}
                   sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-evenly",
+                    backgroundColor: COLORS.lineChartBorder,
+                    borderTopLeftRadius: "5px",
+                    borderTopRightRadius: "5px",
                   }}
                 >
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    sx={{ display: "flex", alignItems: "center " }}
-                  >
-                    <DateRangeOutlinedIcon />
-                    Date : {match.date}
+                  <Typography variant="h5" gutterBottom>
+                    {match.name}
                   </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    sx={{ display: "flex", alignItems: "center " }}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-evenly",
+                    }}
                   >
-                    <PlaceOutlinedIcon /> Venue : {match.venue}
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      sx={{ display: "flex", alignItems: "center " }}
+                    >
+                      <DateRangeOutlinedIcon />
+                      Date : {match.date}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      sx={{ display: "flex", alignItems: "center " }}
+                    >
+                      <PlaceOutlinedIcon /> Venue : {match.venue}
+                    </Typography>
+                  </Box>
+                </Grid>
+
+                <Grid item xs={6} md={4} sx={{ my: "auto" }}>
+                  <Avatar
+                    alt={match.teams[0]}
+                    src={match.teamInfo[0].img}
+                    sx={{ width: 100, height: 100 }}
+                  />
+                  <Typography variant="body1" gutterBottom>
+                    {match.teams[0]}
                   </Typography>
-                </Box>
-              </Grid>
+                </Grid>
 
                 <Grid item xs={6} md={4}>
                   <Item sx={{ mt: 3 }}>
                     {match.teamInfo[0].shortname} :
                     {match.score[0] === undefined
-                      ? null
+                      ? `NA`
                       : `${match.score[0].r} / ${match.score[0].w} (${match.score[0].o})`}
                     <br />
                     {match.teamInfo[1].shortname} :
                     {match.score[1] === undefined
-                      ? null
+                      ? `NA`
                       : `${match.score[1].r} / ${match.score[1].w} (${match.score[1].o})`}
                   </Item>
                   <Typography variant="h6" sx={{ mt: 2 }}>
@@ -141,10 +142,8 @@ function LiveScore() {
                   </Typography>
                 </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        ))
-      )}
+            </Box>
+          ))}
     </>
   );
 
