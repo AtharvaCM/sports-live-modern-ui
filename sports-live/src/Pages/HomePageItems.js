@@ -54,7 +54,7 @@ function HomePageItems() {
                     <Typography gutterBottom variant="h4" component="div">
                       Cricket
                     </Typography>
-                    <Typography variant="body2" color="#ddd">
+                    <Typography variant="body2" color="#ddd" sx={{textAlign:'justify'}}>
                       Cricket is a team sport that is played outdoors. Cricket
                       originated in England and gradually became popular across
                       the globe. This sport requires complete physical fitness
@@ -94,7 +94,7 @@ function HomePageItems() {
                     <Typography gutterBottom variant="h4" component="div">
                       Football
                     </Typography>
-                    <Typography variant="body2" color="#ddd">
+                    <Typography variant="body2" color="#ddd" sx={{textAlign:'justify'}}>
                       Football is the most popular sport worldwide. It is also
                       called “soccer” in some countries. It is an outdoor game
                       that requires absolute athleticism as players have to
