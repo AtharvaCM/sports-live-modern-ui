@@ -1,5 +1,5 @@
-import { React, useEffect, useState } from 'react'
-import LeagueWiseTeamsApi from '../../../API/Football/LeagueWiseTeamsApi'
+import { React, useEffect, useState } from "react";
+import LeagueWiseTeamsApi from "../../../API/Football/LeagueWiseTeamsApi";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -12,21 +12,21 @@ import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 
 import { COLORS } from "../../../Constants/Theme";
+import Spinner from "../../Spinner";
 
 function LeagueTeams({ league }) {
   const navigate = useNavigate();
   const key = league.league_key;
-  const [teams, setteams] = useState([])
+  const [teams, setteams] = useState(null);
   //console.log(key);
 
   useEffect(() => {
-
-    LeagueWiseTeamsApi(key).then((data) => {
-      setteams(data.teams);
-    }).catch(err => console.log(err))
-
-  }, [key])
-
+    LeagueWiseTeamsApi(key)
+      .then((data) => {
+        setteams(data.teams);
+      })
+      .catch((err) => console.log(err));
+  }, [key]);
 
   const TeamList = () => (
     <div>
@@ -37,10 +37,18 @@ function LeagueTeams({ league }) {
           align="center"
           container
         >
-
-          {teams === null
-            ? null
-            : teams.map((team, index) => (
+          {teams === null ? (
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              minHeight="40vh"
+              mx="auto"
+            >
+              <Spinner />
+            </Box>
+          ) : (
+            teams.map((team, index) => (
               <Grid item xs={12} md={3} key={index}>
                 <Box
                   sx={{
@@ -58,9 +66,7 @@ function LeagueTeams({ league }) {
                     }}
                   >
                     <Tooltip title="Click to view more" placement="top">
-                      <CardActionArea
-
-                      >
+                      <CardActionArea>
                         <CardContent>
                           <Avatar
                             alt="Remy Sharp"
@@ -76,16 +82,15 @@ function LeagueTeams({ league }) {
                   </Card>
                 </Box>
               </Grid>
-            ))}
+            ))
+          )}
         </Grid>
       </Box>
     </div>
   );
 
   console.log(teams);
-  return (
-    <>{TeamList()}</>
-  )
+  return <>{TeamList()}</>;
 }
 
-export default LeagueTeams
+export default LeagueTeams;

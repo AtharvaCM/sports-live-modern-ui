@@ -18,6 +18,7 @@ import {
 } from "../../API/Cricket/PlayerRankingsAPI";
 import BattingRankings from "../../Components/Cricket/Rankings/BattingRankings";
 import BowlingRankings from "../../Components/Cricket/Rankings/BowlingRankings";
+import Spinner from "../../Components/Spinner";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -215,7 +216,16 @@ function Rankings() {
         </Box>
         {toggleButtons()}
         <TabPanel value={value} index={0}>
-          {battingTestRankings === null ? null : (
+          {battingTestRankings === null ? (
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              minHeight="30vh"
+            >
+              <Spinner />
+            </Box>
+          ) : (
             <BattingRankings
               rows={
                 alignment === "Test"
@@ -239,7 +249,16 @@ function Rankings() {
           )}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          {battingTestRankings === null ? null : (
+          {battingTestRankings === null ? (
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              minHeight="30vh"
+            >
+              <Spinner />
+            </Box>
+          ) : (
             <BowlingRankings
               rows={
                 alignment === "Test"

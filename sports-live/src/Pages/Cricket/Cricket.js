@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
 import Avatar from "@mui/material/Avatar";
 import { Container } from "react-bootstrap";
 import Card from "@mui/material/Card";
-
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import { CardActionArea } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import CricketSubNavbar from "../../Components/Cricket/CricketSubNavbar";
+import Spinner from "../../Components/Spinner";
 import { COLORS } from "../../Constants/Theme";
 import NewsAPI from "../../API/Cricket/NewsAPI";
 import CurrentMatchesAPI from "../../API/Cricket/CurrentMatchesAPI";
@@ -41,6 +41,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function Cricket() {
   const location = useLocation();
   const navigate = useNavigate();
+  const featuredMatchesRef = useRef();
 
   const [newsArticles, setNewsArticles] = useState(null);
   const [displayInfo, setDisplayInfo] = useState(true);
@@ -65,14 +66,48 @@ function Cricket() {
       .catch((err) => console.log(err));
   }, [location]);
 
+  function handleDownArrowClick() {
+    // Scroll to home page items
+    featuredMatchesRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   const parallaxContainer = () => (
     <Parallax
-      blur={{ min: -15, max: 10 }}
       bgImage="https://wallpaperaccess.com/full/1088580.jpg"
       bgImageAlt="CricInfo Img"
       strength={-200}
     >
-      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}></div>
+      <div style={{ height: "500px", background: "rgba(0,0,0,0.5)" }}>
+        <Box
+          sx={{
+            height: "500px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            fontSize: "4rem",
+            color: "white",
+          }}
+        >
+          <div>
+            <Typography variant="h2">Cricket</Typography>
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "white",
+                fontSize: "60",
+                height: "6rem",
+                width: "6rem",
+                textAlign: "center",
+              }}
+              onClick={handleDownArrowClick}
+              className="btn-scroll"
+              titleAccess="Scroll Down"
+            />
+          </div>
+        </Box>
+      </div>
     </Parallax>
   );
 
@@ -93,13 +128,22 @@ function Cricket() {
         }}
       >
         {/* featured match section */}
-        {featuredMatches === null ? null : (
+        {featuredMatches === null ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="300px"
+          >
+            <Spinner />
+          </Box>
+        ) : (
           <Box
             sx={{ flexGrow: 1 }}
             display="flex"
             justifyContent="center"
             alignItems="center"
-            minHeight="40vh"
+            minHeight="300px"
           >
             <Grid container spacing={1} align="center">
               <Grid item xs={6} md={12}>
@@ -162,75 +206,79 @@ function Cricket() {
       >
         Latest Matches
       </Typography>
-      {featuredMatches === null
-        ? null
-        : featuredMatches.slice(1, 5).map((match, index) => (
-            <Box
-              sx={{ flexGrow: 1 }}
-              style={{
-                width: "80vw",
-                backgroundColor: "#FFFFFF",
-                // marginTop: "10px",
-                borderBottom: "1px solid gray",
+      {featuredMatches === null ? (
+        <Box display="flex" justifyContent="center">
+          <Spinner />
+        </Box>
+      ) : (
+        featuredMatches.slice(1, 5).map((match, index) => (
+          <Box
+            sx={{ flexGrow: 1 }}
+            style={{
+              width: "80vw",
+              backgroundColor: "#FFFFFF",
+              // marginTop: "10px",
+              borderBottom: "1px solid gray",
+            }}
+            className="card-hover"
+            key={index}
+          >
+            <Grid
+              container
+              // spacing={{ xs: 1, md: 1 }}
+              columns={{ xs: 4, sm: 8, md: 12 }}
+              sx={{
+                paddingTop: "1rem",
+                paddingBottom: "1rem",
+                "&:hover": {
+                  cursor: "pointer",
+                },
               }}
-              className="card-hover"
-              key={index}
+              onClick={() => {
+                navigate("/Cricket/LiveScore");
+              }}
             >
-              <Grid
-                container
-                // spacing={{ xs: 1, md: 1 }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
-                sx={{
-                  paddingTop: "1rem",
-                  paddingBottom: "1rem",
-                  "&:hover": {
-                    cursor: "pointer",
-                  },
-                }}
-                onClick={() => {
-                  navigate("/Cricket/LiveScore");
-                }}
-              >
-                <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
-                  <Avatar
-                    alt="Team Logo"
-                    src={match.teamInfo[0].img}
-                    sx={{ width: 80, height: 80, ml: 2 }}
-                  />
-                  <span>{match.teams[0]}</span>
-                </Grid>
-
-                <Grid item xs={2} sm={4} md={4} marginY="auto">
-                  <Item>
-                    <div>
-                      {match.teams[0]} : {match.score[0].r} / {match.score[0].w}{" "}
-                      ({match.score[0].o})
-                    </div>
-                    <div>
-                      {match.teams[1]} : {match.score[1].r} / {match.score[1].w}{" "}
-                      ({match.score[1].o})
-                    </div>
-                  </Item>
-                </Grid>
-
-                <Grid
-                  item
-                  xs={2}
-                  sm={4}
-                  md={4}
-                  align="right"
-                  style={verticalAlignStyle}
-                >
-                  <span>{match.teams[1]}</span>
-                  <Avatar
-                    alt="Team Logo"
-                    src={match.teamInfo[1].img}
-                    sx={{ width: 80, height: 80, mr: 2 }}
-                  />
-                </Grid>
+              <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
+                <Avatar
+                  alt="Team Logo"
+                  src={match.teamInfo[0].img}
+                  sx={{ width: 80, height: 80, ml: 2 }}
+                />
+                <span>{match.teams[0]}</span>
               </Grid>
-            </Box>
-          ))}
+
+              <Grid item xs={2} sm={4} md={4} marginY="auto">
+                <Item>
+                  <div>
+                    {match.teams[0]} : {match.score[0].r} / {match.score[0].w} (
+                    {match.score[0].o})
+                  </div>
+                  <div>
+                    {match.teams[1]} : {match.score[1].r} / {match.score[1].w} (
+                    {match.score[1].o})
+                  </div>
+                </Item>
+              </Grid>
+
+              <Grid
+                item
+                xs={2}
+                sm={4}
+                md={4}
+                align="right"
+                style={verticalAlignStyle}
+              >
+                <span>{match.teams[1]}</span>
+                <Avatar
+                  alt="Team Logo"
+                  src={match.teamInfo[1].img}
+                  sx={{ width: 80, height: 80, mr: 2 }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        ))
+      )}
     </>
   );
 
@@ -250,7 +298,11 @@ function Cricket() {
             alignItems: "center",
           }}
         >
-          {newsArticles == null ? null : (
+          {newsArticles == null ? (
+            <Box display="flex" justifyContent="center" sx={{ mx: "auto" }}>
+              <Spinner />
+            </Box>
+          ) : (
             <Box sx={{ width: "100%", mb: 5 }}>
               <Grid
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
@@ -258,7 +310,14 @@ function Cricket() {
                 container
               >
                 <Grid item xs={12} md={12}>
-                  <h2 style={{ color: COLORS.colorLight }}>Latest News</h2>
+                  <Typography
+                    variant="h4"
+                    gutterBottom
+                    style={{ color: COLORS.colorLight }}
+                    sx={{ mb: 5 }}
+                  >
+                    Latest News
+                  </Typography>
                 </Grid>
                 {newsArticles.slice(0, 3).map((newsArticle, index) => (
                   <Grid item xs={4} key={index} sx={{ mb: 5 }}>
@@ -326,6 +385,7 @@ function Cricket() {
               marginBottom: "5rem",
               borderRadius: "5px",
             }}
+            ref={featuredMatchesRef}
           >
             {featuredMatchesCarousel()}
           </div>

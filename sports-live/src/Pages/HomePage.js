@@ -1,53 +1,84 @@
-import React, { useEffect, useState } from "react";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
+import React, { useEffect, useState, useRef } from "react";
+import SportsImage from "../Assets/Images/sports-tools1.jpg";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import HomePageItems from "./HomePageItems";
+import { Collapse } from "@mui/material";
+import Spinner from "../Components/Spinner";
 
-import myVideo from "../Assets/Videos/sports.mp4";
+const STYLE = {
+  divStyle: {
+    marginTop: "-32px",
+    backgroundImage: `url(${SportsImage})`,
+    backgroundRepeat: "no-repeat",
+    minheight: "100vh",
+    backgroundSize: "cover",
+  },
+  h1Style: {
+    display: "flex",
+    justifyContent: "center",
+    color: "white",
+    textAlign: "center",
+    fontSize: "3rem",
+    height: "50vh",
+    alignItems: "center",
+  },
+};
 
 function HomePage() {
+  const [checked, setChecked] = useState(false);
+  // For spinner
   const [loading, setLoading] = useState(true);
+  const homePageItemRef = useRef();
 
-  const handleVideoLoad = () => {
-    console.log("Video is loaded");
+  useEffect(() => {
+    setChecked(true);
     setLoading(false);
-  };
+  }, []);
 
-  useEffect(() => {}, []);
+  function handleDownArrowClick() {
+    // Scroll to home page items
+    homePageItemRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
 
-  return (
-    <Container maxWidth="" className="landing-container">
-      <div className="landing-video-container" style={{ height: "inherit" }}>
-        <Box sx={{ bgcolor: "#cfe8fc", height: "inherit" }}>
-          {loading === true ? (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "inherit",
-              }}
-            >
-              <CircularProgress />
-            </Box>
-          ) : null}
-          <>
-            <video
-              autoPlay
-              loop
-              muted
-              className="landing-video"
-              width="100"
-              onLoadedData={handleVideoLoad}
-              style={{ display: `${loading === true ? "none" : "block"}` }}
-            >
-              <source src={myVideo} type="video/mp4" />
-            </video>
-          </>
-        </Box>
+  const showSpinner = () => <Spinner />;
+
+  const homePageContent = () => (
+    <div style={STYLE.divStyle}>
+      <h1 style={STYLE.h1Style}>
+        <Collapse
+          in={checked}
+          {...(checked ? { timeout: 1000 } : {})}
+          collapseheight={55}
+        >
+          <span style={{ marginTop: "100px" }}>
+            Welcome to Sports<span style={{ color: "orange" }}>Live </span>
+          </span>
+        </Collapse>
+      </h1>
+
+      <div style={{ textAlign: "center", marginBottom: "50px" }} id="Header">
+        <KeyboardArrowDownIcon
+          sx={{
+            color: "white",
+            fontSize: "60",
+            height: "4rem",
+            width: "4rem",
+            textAlign: "center",
+          }}
+          onClick={handleDownArrowClick}
+          className="btn-scroll"
+        />
       </div>
-    </Container>
+
+      <div ref={homePageItemRef}>
+        <HomePageItems />
+      </div>
+    </div>
   );
+
+  return <>{loading === true ? showSpinner() : homePageContent()}</>;
 }
 
 export default HomePage;

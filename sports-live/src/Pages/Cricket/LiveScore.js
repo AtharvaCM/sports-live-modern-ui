@@ -118,12 +118,12 @@ function LiveScore() {
                   <Item sx={{ mt: 3 }}>
                     {match.teamInfo[0].shortname} :
                     {match.score[0] === undefined
-                      ? null
+                      ? `NA`
                       : `${match.score[0].r} / ${match.score[0].w} (${match.score[0].o})`}
                     <br />
                     {match.teamInfo[1].shortname} :
                     {match.score[1] === undefined
-                      ? null
+                      ? `NA`
                       : `${match.score[1].r} / ${match.score[1].w} (${match.score[1].o})`}
                   </Item>
                   <Typography variant="h6" sx={{ mt: 2 }}>

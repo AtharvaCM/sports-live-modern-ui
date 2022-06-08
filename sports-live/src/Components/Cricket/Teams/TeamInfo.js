@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -9,10 +9,12 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import { Avatar } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import TeamSchedule from "./TeamSchedule";
 import TeamPlayers from "./TeamPlayers";
 import TeamStats from "./TeamStats";
+import { COLORS } from "../../../Constants/Theme";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,11 +61,27 @@ function TeamInfo() {
   return (
     <>
       <Box
+        sx={{ display: "flex", alignItems: "center", mt: 2, ml: 2 }}
+        className="back-link-box"
+      >
+        <ArrowBackIcon
+          sx={{ color: COLORS.colorPrimary }}
+          className="back-link-arrow"
+        />
+        <Link
+          to="/Cricket/Teams"
+          style={{ textDecoration: "none", color: COLORS.colorPrimary }}
+        >
+          <Typography variant="body1" className="back-link-text">
+            Back to Teams
+          </Typography>
+        </Link>
+      </Box>
+      <Box
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          mt: 2,
         }}
       >
         <Chip

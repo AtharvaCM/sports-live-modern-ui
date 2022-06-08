@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
   Avatar,
@@ -16,12 +16,14 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { StyledTableRow, StyledTableCell } from "../../Constants/Styles";
 import { COLORS } from "../../Constants/Theme";
 
 function Player() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { player } = location.state;
   console.log("passed player", player);
 
@@ -424,7 +426,31 @@ function Player() {
 
   return (
     <>
-      <Container sx={{ mt: 5 }}>{playerInfoSection()}</Container>
+      <Container sx={{ mt: 5 }}>
+        <Box
+          sx={{ display: "flex", alignItems: "center", mb: 2 }}
+          className="back-link-box"
+          onClick={() => navigate(-1)}
+        >
+          <ArrowBackIcon
+            sx={{ color: COLORS.colorPrimary }}
+            className="back-link-arrow"
+          />
+          {/* <Link
+            to={`/Cricket/Teams/${player.team}`}
+            style={{ textDecoration: "none", color: COLORS.colorPrimary }}
+          > */}
+          <Typography
+            variant="body1"
+            className="back-link-text"
+            sx={{ color: COLORS.colorPrimary }}
+          >
+            Back
+          </Typography>
+          {/* </Link> */}
+        </Box>
+        {playerInfoSection()}
+      </Container>
     </>
   );
 }

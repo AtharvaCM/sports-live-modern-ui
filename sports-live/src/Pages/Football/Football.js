@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import FootballSubNavbar from "../../Components/Football/FootballSubNavbar";
 
@@ -17,20 +17,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import { CardActionArea } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { COLORS } from "../../Constants/Theme";
 import footballNewsApi from "../../API/Football/FootballNewsApi";
 import FootballLiveScoreApi from "../../API/Football/FootballLiveScoreApi";
-
-const insideStyles = {
-  padding: 20,
-  position: "absolute",
-  top: "40%",
-  left: "20%",
-  fontSize: "4rem",
-  color: "white",
-  transform: "translate(-50%,-50%)",
-};
+import Spinner from "../../Components/Spinner";
 
 const verticalAlignStyle = {
   display: "flex",
@@ -50,6 +42,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Football() {
   const location = useLocation();
+  const featuredMatchesRef = useRef();
   const [newsArticles, setNewsArticles] = useState(null);
   const [displayInfo, setDisplayInfo] = useState(true);
   const [featuredMatches, setFeaturedMatches] = useState(null);
@@ -74,15 +67,47 @@ function Football() {
       .catch((err) => console.log(err));
   }, [location]);
 
+  function handleDownArrowClick() {
+    // Scroll to home page items
+    featuredMatchesRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   const parallaxContainer = () => (
     <Parallax
-      blur={{ min: -15, max: 10 }}
       bgImage={require("../../Assets/Images/Football/footballCover1.jpg")}
       bgImageAlt="CricInfo Img"
-      strength={-100}
+      strength={-200}
     >
-      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}>
-        <div style={insideStyles}>Football</div>
+      <div style={{ height: "500px", background: "rgba(0,0,0,0.5)" }}>
+        <Box
+          sx={{
+            height: "500px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            fontSize: "4rem",
+            color: "white",
+          }}
+        >
+          <div>
+            <Typography variant="h2">Football</Typography>
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "white",
+                fontSize: "60",
+                height: "6rem",
+                width: "6rem",
+                textAlign: "center",
+              }}
+              onClick={handleDownArrowClick}
+              className="btn-scroll"
+              titleAccess="Scroll Down"
+            />
+          </div>
+        </Box>
       </div>
     </Parallax>
   );
@@ -104,13 +129,22 @@ function Football() {
         }}
       >
         {/* featured match section */}
-        {featuredMatches === null ? null : (
+        {featuredMatches === null ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="300px"
+          >
+            <Spinner />
+          </Box>
+        ) : (
           <Box
             sx={{ flexGrow: 1 }}
             display="flex"
             justifyContent="center"
             alignItems="center"
-            minHeight="40vh"
+            minHeight="300px"
           >
             <Grid container spacing={1} align="center">
               <Grid item xs={6} md={12}>
@@ -119,7 +153,7 @@ function Football() {
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
                 <Avatar
-                  alt="Team Logo"
+                  alt={featuredMatches[0].event_home_team}
                   src={featuredMatches[0].home_team_logo}
                   sx={{ width: 100, height: 100 }}
                 />
@@ -155,7 +189,7 @@ function Football() {
 
               <Grid item xs={6} md={4} sx={{ my: "auto" }}>
                 <Avatar
-                  alt="Team Logo"
+                  alt={featuredMatches[0].event_away_team}
                   src={featuredMatches[0].away_team_logo}
                   sx={{ width: 100, height: 100 }}
                 />
@@ -178,84 +212,88 @@ function Football() {
       >
         Latest Matches
       </Typography>
-      {featuredMatches === null
-        ? null
-        : featuredMatches.slice(1, 5).map((match, index) => (
-            <Box
-              sx={{ flexGrow: 1 }}
-              style={{
-                width: "80vw",
-                backgroundColor: "#FFFFFF",
-                // marginTop: "10px",
-                borderBottom: "1px solid gray",
+      {featuredMatches === null ? (
+        <Box display="flex" justifyContent="center">
+          <Spinner />
+        </Box>
+      ) : (
+        featuredMatches.slice(1, 5).map((match, index) => (
+          <Box
+            sx={{ flexGrow: 1 }}
+            style={{
+              width: "80vw",
+              backgroundColor: "#FFFFFF",
+              // marginTop: "10px",
+              borderBottom: "1px solid gray",
+            }}
+            className="card-hover"
+            key={index}
+          >
+            <Grid
+              container
+              // spacing={{ xs: 1, md: 1 }}
+              columns={{ xs: 4, sm: 8, md: 12 }}
+              sx={{
+                paddingTop: "1rem",
+                paddingBottom: "1rem",
               }}
-              className="card-hover"
-              key={index}
             >
-              <Grid
-                container
-                // spacing={{ xs: 1, md: 1 }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
-                sx={{
-                  paddingTop: "1rem",
-                  paddingBottom: "1rem",
-                }}
-              >
-                <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
-                  <Avatar
-                    alt="Team Logo"
-                    src={match.home_team_logo}
-                    sx={{ width: 80, height: 80, ml: 2 }}
-                  />
-                  <span>{match.event_home_team}</span>
-                </Grid>
+              <Grid item xs={2} sm={4} md={4} style={verticalAlignStyle}>
+                <Avatar
+                  alt="Team Logo"
+                  src={match.home_team_logo}
+                  sx={{ width: 80, height: 80, ml: 2 }}
+                />
+                <span>{match.event_home_team}</span>
+              </Grid>
 
-                <Grid
-                  item
-                  xs={2}
-                  sm={4}
-                  md={4}
-                  justifyContent="center"
-                  display="flex"
+              <Grid
+                item
+                xs={2}
+                sm={4}
+                md={4}
+                justifyContent="center"
+                display="flex"
+              >
+                <Item
+                  sx={{
+                    mt: 1.4,
+                    width: 100,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  <Item
+                  <Typography
+                    variant="h5"
                     sx={{
-                      mt: 1.4,
-                      width: 100,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      fontWeight: "bold",
                     }}
                   >
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {match.event_ft_result}
-                    </Typography>
-                  </Item>
-                </Grid>
-
-                <Grid
-                  item
-                  xs={2}
-                  sm={4}
-                  md={4}
-                  align="right"
-                  style={verticalAlignStyle}
-                >
-                  <span>{match.event_away_team}</span>
-                  <Avatar
-                    alt="Team Logo"
-                    src={match.away_team_logo}
-                    sx={{ width: 80, height: 80, mr: 2 }}
-                  />
-                </Grid>
+                    {match.event_ft_result}
+                  </Typography>
+                </Item>
               </Grid>
-            </Box>
-          ))}
+
+              <Grid
+                item
+                xs={2}
+                sm={4}
+                md={4}
+                align="right"
+                style={verticalAlignStyle}
+              >
+                <span>{match.event_away_team}</span>
+                <Avatar
+                  alt="Team Logo"
+                  src={match.away_team_logo}
+                  sx={{ width: 80, height: 80, mr: 2 }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        ))
+      )}
     </>
   );
 
@@ -275,7 +313,11 @@ function Football() {
             alignItems: "center",
           }}
         >
-          {newsArticles == null ? null : (
+          {newsArticles == null ? (
+            <Box display="flex" justifyContent="center" sx={{ mx: "auto" }}>
+              <Spinner />
+            </Box>
+          ) : (
             <Box sx={{ width: "100%", mb: 5 }}>
               <Grid
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
@@ -352,6 +394,7 @@ function Football() {
               marginBottom: "5rem",
               borderRadius: "5px",
             }}
+            ref={featuredMatchesRef}
           >
             {featuredMatchesCarousel()}
           </div>

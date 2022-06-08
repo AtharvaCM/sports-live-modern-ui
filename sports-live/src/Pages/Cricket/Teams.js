@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Parallax } from "react-parallax";
 
 import Box from "@mui/material/Box";
@@ -10,26 +10,56 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 import { COLORS } from "../../Constants/Theme";
 import TeamsListAPI from "../../API/Cricket/TeamsListAPI";
+import Spinner from "../../Components/Spinner";
 
-const insideStyles = {
-  padding: 20,
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  fontSize: "4rem",
-  color: "white",
-  transform: "translate(-50%,-50%)",
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
 function Teams() {
+  const teamsRef = useRef();
   const location = useLocation();
   const [teams, setTeams] = useState(null);
   const [displayTeams, setDisplayTeams] = useState(true);
+  const [value, setValue] = React.useState(0);
 
   useEffect(() => {
     // Check the path
@@ -44,42 +74,105 @@ function Teams() {
       .catch((err) => console.log(err));
   }, [location]);
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  function handleDownArrowClick() {
+    // Scroll to home page items
+    teamsRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   const parallaxContainer = () => (
     <Parallax
-      blur={{ min: -15, max: 10 }}
       bgImage={require("../../Assets/Images/Cricket/cricketTeamsGroupPhoto.jpg")}
       bgImageAlt="CricInfo Img"
-      strength={-200}
+      strength={-300}
     >
       <div
         style={{
-          height: "800px",
-          background: "rgba(0,0,0,0.3)",
+          height: "500px",
+          background: "rgba(0,0,0,0.5)",
         }}
       >
-        <div style={insideStyles}>Teams</div>
+        <Box
+          sx={{
+            height: "500px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            fontSize: "4rem",
+            color: "white",
+          }}
+        >
+          <div>
+            <Typography variant="h2">Teams</Typography>
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "white",
+                fontSize: "60",
+                height: "6rem",
+                width: "6rem",
+                textAlign: "center",
+              }}
+              onClick={handleDownArrowClick}
+              className="btn-scroll"
+              titleAccess="Scroll Down"
+            />
+          </div>
+        </Box>
       </div>
     </Parallax>
   );
 
   const TeamList = () => (
-    <div>
+    <div ref={teamsRef}>
       <Box sx={{ width: "100%", marginBottom: "50px" }}>
-        <Grid
-          columnSpacing={{ sm: 2, md: 3 }}
-          spacing={6}
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{ color: COLORS.colorDark, my: 10 }}
           align="center"
-          container
         >
-          <Grid item xs={12} md={12}>
-            <h2 style={{ color: COLORS.colorDark, marginTop: "100px" }}>
-              Teams
-            </h2>
-          </Grid>
+          Teams
+        </Typography>
 
-          {teams === null
-            ? null
-            : teams.map((team, index) => (
+        {/* Tabs */}
+
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="Teams tab"
+            centered
+          >
+            <Tab label="Men" {...a11yProps(0)} />
+            <Tab label="Women" {...a11yProps(1)} />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+          {/* Mens Team */}
+          {teams === null ? (
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              minHeight="40vh"
+              mx="auto"
+            >
+              <Spinner />
+            </Box>
+          ) : (
+            <Grid
+              columnSpacing={{ sm: 2, md: 3 }}
+              spacing={6}
+              align="center"
+              container
+            >
+              {teams.map((team, index) => (
                 <Grid item xs={12} md={4} key={index}>
                   <Box
                     sx={{
@@ -113,7 +206,24 @@ function Teams() {
                   </Box>
                 </Grid>
               ))}
-        </Grid>
+            </Grid>
+          )}
+          {/* Mens Team END */}
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Box
+            sx={{
+              height: "50vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography variant="h5" gutterBottom align="center">
+              Coming Soon...
+            </Typography>
+          </Box>
+        </TabPanel>
       </Box>
     </div>
   );
