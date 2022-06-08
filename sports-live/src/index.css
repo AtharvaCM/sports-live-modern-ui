@@ -15,6 +15,15 @@ code {
     monospace;
 }
 
+.back-link-box:hover .back-link-arrow {
+  color: darkblue;
+  cursor: pointer;
+}
+.back-link-box:hover .back-link-text {
+  color: darkblue;
+  cursor: pointer;
+}
+
 /* Home page */
 
 .landing-container {
