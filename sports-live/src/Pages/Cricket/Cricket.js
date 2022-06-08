@@ -86,20 +86,26 @@ function Cricket() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            textAlign: "center",
+            fontSize: "4rem",
+            color: "white",
           }}
         >
-          <KeyboardArrowDownIcon
-            sx={{
-              color: "white",
-              fontSize: "60",
-              height: "6rem",
-              width: "6rem",
-              textAlign: "center",
-            }}
-            onClick={handleDownArrowClick}
-            className="btn-scroll"
-            titleAccess="Scroll Down"
-          />
+          <div>
+            <Typography variant="h2">Cricket</Typography>
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "white",
+                fontSize: "60",
+                height: "6rem",
+                width: "6rem",
+                textAlign: "center",
+              }}
+              onClick={handleDownArrowClick}
+              className="btn-scroll"
+              titleAccess="Scroll Down"
+            />
+          </div>
         </Box>
       </div>
     </Parallax>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -12,6 +12,7 @@ import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { COLORS } from "../../Constants/Theme";
 import { Timeline } from "../../Components/Football/Match/Timeline";
@@ -36,6 +37,7 @@ const doughnutChartBGColors = [
 
 function MatchSummaryFootball() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { match } = location.state;
   console.log("match passed", match);
 
@@ -175,7 +177,8 @@ function MatchSummaryFootball() {
         flexGrow: 1,
         width: "95vw",
         mx: "auto",
-        my: 4,
+        mt: 2,
+        mb: 4,
       }}
       display="flex"
       justifyContent="center"
@@ -367,6 +370,34 @@ function MatchSummaryFootball() {
 
   return (
     <div>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          mt: 2,
+          mx: 3,
+          width: "95vw",
+        }}
+        className="back-link-box"
+        onClick={() => navigate(-1)}
+      >
+        <ArrowBackIcon
+          sx={{ color: COLORS.colorPrimary }}
+          className="back-link-arrow"
+        />
+        {/* <Link
+            to={`/Cricket/Teams/${player.team}`}
+            style={{ textDecoration: "none", color: COLORS.colorPrimary }}
+          > */}
+        <Typography
+          variant="body1"
+          className="back-link-text"
+          sx={{ color: COLORS.colorPrimary }}
+        >
+          Back
+        </Typography>
+        {/* </Link> */}
+      </Box>
       {match === undefined ? null : matchCard()}
       {match === undefined ? null : goalTimeline()}
       {match === undefined ? null : statsContainer()}

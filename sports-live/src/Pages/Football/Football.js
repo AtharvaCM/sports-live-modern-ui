@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import FootballSubNavbar from "../../Components/Football/FootballSubNavbar";
 
@@ -17,21 +17,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import { CardActionArea } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { COLORS } from "../../Constants/Theme";
 import footballNewsApi from "../../API/Football/FootballNewsApi";
 import FootballLiveScoreApi from "../../API/Football/FootballLiveScoreApi";
 import Spinner from "../../Components/Spinner";
-
-const insideStyles = {
-  padding: 20,
-  position: "absolute",
-  top: "40%",
-  left: "20%",
-  fontSize: "4rem",
-  color: "white",
-  transform: "translate(-50%,-50%)",
-};
 
 const verticalAlignStyle = {
   display: "flex",
@@ -51,6 +42,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Football() {
   const location = useLocation();
+  const featuredMatchesRef = useRef();
   const [newsArticles, setNewsArticles] = useState(null);
   const [displayInfo, setDisplayInfo] = useState(true);
   const [featuredMatches, setFeaturedMatches] = useState(null);
@@ -75,15 +67,47 @@ function Football() {
       .catch((err) => console.log(err));
   }, [location]);
 
+  function handleDownArrowClick() {
+    // Scroll to home page items
+    featuredMatchesRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   const parallaxContainer = () => (
     <Parallax
-      blur={{ min: -15, max: 10 }}
       bgImage={require("../../Assets/Images/Football/footballCover1.jpg")}
       bgImageAlt="CricInfo Img"
-      strength={-100}
+      strength={-200}
     >
-      <div style={{ height: "800px", background: "rgba(0,0,0,0.3)" }}>
-        <div style={insideStyles}>Football</div>
+      <div style={{ height: "500px", background: "rgba(0,0,0,0.5)" }}>
+        <Box
+          sx={{
+            height: "500px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            fontSize: "4rem",
+            color: "white",
+          }}
+        >
+          <div>
+            <Typography variant="h2">Football</Typography>
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "white",
+                fontSize: "60",
+                height: "6rem",
+                width: "6rem",
+                textAlign: "center",
+              }}
+              onClick={handleDownArrowClick}
+              className="btn-scroll"
+              titleAccess="Scroll Down"
+            />
+          </div>
+        </Box>
       </div>
     </Parallax>
   );
@@ -370,6 +394,7 @@ function Football() {
               marginBottom: "5rem",
               borderRadius: "5px",
             }}
+            ref={featuredMatchesRef}
           >
             {featuredMatchesCarousel()}
           </div>
