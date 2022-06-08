@@ -14,6 +14,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 import LeagueListApi from "../../API/Football/LeagueListApi";
 import { StyledTableCell, StyledTableRow } from "../../Constants/Styles";
+import Spinner from "../../Components/Spinner";
 
 const LeagueList = (league) => (
   <>
@@ -26,47 +27,56 @@ const LeagueList = (league) => (
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">Flag</StyledTableCell>
-            <StyledTableCell align="center">Country</StyledTableCell>
-            <StyledTableCell align="center">League Logo</StyledTableCell>
             <StyledTableCell align="center">League Name</StyledTableCell>
+            <StyledTableCell align="center">League Logo</StyledTableCell>
+            <StyledTableCell align="center">Country</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {league
-            ? league.slice(0, 2).map((row) => (
-                <StyledTableRow
-                  key={row.country_logo}
-                  component={Link}
-                  to={row.league_name}
-                  state={{ league: row }}
-                  sx={{ textDecoration: "none" }}
-                >
-                  <StyledTableCell align="center">
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={row.country_logo}
-                      sx={{ width: 80, height: 80, mx: "auto" }}
-                    />
-                  </StyledTableCell>
+          {league ? (
+            league.slice(0, 2).map((row) => (
+              <StyledTableRow
+                key={row.country_logo}
+                component={Link}
+                to={row.league_name}
+                state={{ league: row }}
+                sx={{ textDecoration: "none" }}
+              >
+                <StyledTableCell align="center">
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={row.country_logo}
+                    sx={{ width: 80, height: 80, mx: "auto" }}
+                  />
+                </StyledTableCell>
 
-                  <StyledTableCell align="center">
-                    {row.country_name}
-                  </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.league_name}
+                </StyledTableCell>
 
-                  <StyledTableCell align="center">
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={row.league_logo}
-                      sx={{ width: 80, height: 80, mx: "auto" }}
-                    />
-                  </StyledTableCell>
+                <StyledTableCell align="center">
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={row.league_logo}
+                    sx={{ width: 80, height: 80, mx: "auto" }}
+                  />
+                </StyledTableCell>
 
-                  <StyledTableCell align="center">
-                    {row.league_name}
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))
-            : ""}
+                <StyledTableCell align="center">
+                  {row.country_name}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))
+          ) : (
+            <StyledTableRow>
+              <StyledTableCell></StyledTableCell>
+              <StyledTableCell></StyledTableCell>
+              <StyledTableCell>
+                <Spinner />
+              </StyledTableCell>
+              <StyledTableCell></StyledTableCell>
+            </StyledTableRow>
+          )}
         </TableBody>
       </Table>
     </TableContainer>

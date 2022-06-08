@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import TeamScheduleAPI from "../../../API/Cricket/TeamScheduleAPI";
+import Spinner from "../../Spinner";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -58,7 +59,15 @@ function TeamSchedule({ team }) {
         </TableHead>
         <TableBody>
           {schedule === null ? (
-            <p>No Schedule Found</p>
+            <StyledTableRow>
+              <StyledTableCell></StyledTableCell>
+              <StyledTableCell></StyledTableCell>
+              <StyledTableCell>
+                <Spinner />
+              </StyledTableCell>
+              <StyledTableCell></StyledTableCell>
+              <StyledTableCell></StyledTableCell>
+            </StyledTableRow>
           ) : (
             schedule.map((row, index) => (
               <StyledTableRow key={index}>

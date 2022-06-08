@@ -15,6 +15,7 @@ import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 
 import LiveScoreFootballApi from "../../API/Football/FootballLiveScoreApi";
 import { COLORS } from "../../Constants/Theme";
+import Spinner from "../../Components/Spinner";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: COLORS.colorDark,
@@ -43,138 +44,147 @@ function LiveScoreFootball() {
   console.log(liveMatches);
   const matchesList = () => (
     <>
-      {liveMatches === null
-        ? null
-        : liveMatches.map((match, index) => (
-            <Box
+      {liveMatches === null ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="40vh"
+        >
+          <Spinner />
+        </Box>
+      ) : (
+        liveMatches.map((match, index) => (
+          <Box
+            sx={{
+              flexGrow: 1,
+              width: "95vw",
+              mx: "auto",
+              mb: 4,
+              cursor: "pointer",
+            }}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="40vh"
+            key={index}
+          >
+            <Grid
+              container
+              spacing={1}
+              align="center"
               sx={{
-                flexGrow: 1,
-                width: "95vw",
-                mx: "auto",
-                mb: 4,
-                cursor: "pointer",
+                backgroundColor: COLORS.colorLight,
+                borderRadius: "5px",
+                pb: 2,
+                "&:hover": {
+                  boxShadow: 3,
+                },
               }}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              minHeight="40vh"
-              key={index}
+              onClick={() => {
+                navigate("/Football/MatchSummary", {
+                  state: { match: match },
+                });
+              }}
             >
               <Grid
-                container
-                spacing={1}
-                align="center"
+                item
+                xs={6}
+                md={12}
                 sx={{
-                  backgroundColor: COLORS.colorLight,
-                  borderRadius: "5px",
-                  pb: 2,
-                  "&:hover": {
-                    boxShadow: 3,
-                  },
-                }}
-                onClick={() => {
-                  navigate("/Football/MatchSummary", {
-                    state: { match: match },
-                  });
+                  backgroundColor: COLORS.lineChartBorder,
+                  borderTopLeftRadius: "5px",
+                  borderTopRightRadius: "5px",
                 }}
               >
-                <Grid
-                  item
-                  xs={6}
-                  md={12}
+                <Typography variant="h5" gutterBottom>
+                  {match.event_home_team} VS {match.event_away_team}
+                </Typography>
+                <Box
                   sx={{
-                    backgroundColor: COLORS.lineChartBorder,
-                    borderTopLeftRadius: "5px",
-                    borderTopRightRadius: "5px",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-evenly",
                   }}
                 >
-                  <Typography variant="h5" gutterBottom>
-                    {match.event_home_team} VS {match.event_away_team}
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-evenly",
-                    }}
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    sx={{ display: "flex", alignItems: "center " }}
                   >
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      sx={{ display: "flex", alignItems: "center " }}
-                    >
-                      <DateRangeOutlinedIcon />
-                      Date : {match.event_date}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      sx={{ display: "flex", alignItems: "center " }}
-                    >
-                      <CampaignOutlinedIcon /> League : {match.league_name}
-                    </Typography>
-
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      sx={{ display: "flex", alignItems: "center " }}
-                    >
-                      <OutlinedFlagIcon /> Season : {match.league_season}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      sx={{ display: "flex", alignItems: "center " }}
-                    >
-                      <PlaceOutlinedIcon /> Venue : {match.event_stadium}
-                    </Typography>
-                  </Box>
-                </Grid>
-
-                <Grid item xs={6} md={4} sx={{ my: "auto" }}>
-                  <Avatar
-                    alt={match.event_home_team}
-                    src={match.home_team_logo}
-                    sx={{ width: 100, height: 100 }}
-                  />
-                  <Typography variant="body1" gutterBottom>
-                    {match.event_home_team}
+                    <DateRangeOutlinedIcon />
+                    Date : {match.event_date}
                   </Typography>
-                </Grid>
-
-                <Grid item xs={6} md={4}>
-                  <Item
-                    sx={{
-                      mt: 3,
-                      height: 50,
-                      width: 100,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    sx={{ display: "flex", alignItems: "center " }}
                   >
-                    <Typography sx={{ fontWeight: "bold" }} variant="h5">
-                      {match.event_ft_result}
-                    </Typography>
-                  </Item>
-                  <Typography variant="h6" sx={{ mt: 2 }}>
-                    {match.event_status}
+                    <CampaignOutlinedIcon /> League : {match.league_name}
                   </Typography>
-                </Grid>
 
-                <Grid item xs={6} md={4} sx={{ my: "auto" }}>
-                  <Avatar
-                    alt={match.event_away_team}
-                    src={match.away_team_logo}
-                    sx={{ width: 100, height: 100 }}
-                  />
-                  <Typography variant="body1" gutterBottom>
-                    {match.event_away_team}
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    sx={{ display: "flex", alignItems: "center " }}
+                  >
+                    <OutlinedFlagIcon /> Season : {match.league_season}
                   </Typography>
-                </Grid>
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    sx={{ display: "flex", alignItems: "center " }}
+                  >
+                    <PlaceOutlinedIcon /> Venue : {match.event_stadium}
+                  </Typography>
+                </Box>
               </Grid>
-            </Box>
-          ))}
+
+              <Grid item xs={6} md={4} sx={{ my: "auto" }}>
+                <Avatar
+                  alt={match.event_home_team}
+                  src={match.home_team_logo}
+                  sx={{ width: 100, height: 100 }}
+                />
+                <Typography variant="body1" gutterBottom>
+                  {match.event_home_team}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={6} md={4}>
+                <Item
+                  sx={{
+                    mt: 3,
+                    height: 50,
+                    width: 100,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography sx={{ fontWeight: "bold" }} variant="h5">
+                    {match.event_ft_result}
+                  </Typography>
+                </Item>
+                <Typography variant="h6" sx={{ mt: 2 }}>
+                  {match.event_status}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={6} md={4} sx={{ my: "auto" }}>
+                <Avatar
+                  alt={match.event_away_team}
+                  src={match.away_team_logo}
+                  sx={{ width: 100, height: 100 }}
+                />
+                <Typography variant="body1" gutterBottom>
+                  {match.event_away_team}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        ))
+      )}
     </>
   );
 

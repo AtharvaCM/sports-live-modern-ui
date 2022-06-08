@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 import { COLORS } from "../../Constants/Theme";
 import NewsAPI from "../../API/Cricket/NewsAPI";
+import Spinner from "../../Components/Spinner";
 
 const insideStyles = {
   padding: 20,
@@ -52,7 +53,13 @@ function News() {
     <Box sx={{ width: "100%", mb: 5 }}>
       <Grid columnSpacing={{ xs: 1, sm: 2, md: 1 }} align="center" container>
         <Grid item xs={12} md={12}>
-          <h2 style={{ color: COLORS.colorDark }}>Latest News</h2>
+          <Typography
+            variant="h4"
+            gutterBottom
+            sx={{ color: COLORS.colorDark, my: 4 }}
+          >
+            Latest News
+          </Typography>
         </Grid>
 
         {newsArticles.map((newsArticle, index) => (
@@ -104,7 +111,18 @@ function News() {
   return (
     <>
       {parallaxContainer()}
-      {newsArticles === null ? null : newsSection()}
+      {newsArticles === null ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="40vh"
+        >
+          <Spinner />
+        </Box>
+      ) : (
+        newsSection()
+      )}
     </>
   );
 }

@@ -15,6 +15,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 import { COLORS } from "../../Constants/Theme";
 import TeamsListAPI from "../../API/Cricket/TeamsListAPI";
+import Spinner from "../../Components/Spinner";
 
 const insideStyles = {
   padding: 20,
@@ -72,47 +73,61 @@ function Teams() {
           container
         >
           <Grid item xs={12} md={12}>
-            <h2 style={{ color: COLORS.colorDark, marginTop: "100px" }}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              sx={{ color: COLORS.colorDark, mt: 10 }}
+            >
               Teams
-            </h2>
+            </Typography>
           </Grid>
 
-          {teams === null
-            ? null
-            : teams.map((team, index) => (
-                <Grid item xs={12} md={4} key={index}>
-                  <Box
-                    sx={{
-                      minWidth: 175,
-                      maxWidth: 250,
-                    }}
+          {teams === null ? (
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              minHeight="40vh"
+              mx="auto"
+            >
+              <Spinner />
+            </Box>
+          ) : (
+            teams.map((team, index) => (
+              <Grid item xs={12} md={4} key={index}>
+                <Box
+                  sx={{
+                    minWidth: 175,
+                    maxWidth: 250,
+                  }}
+                >
+                  <Card
+                    variant="outlined"
+                    sx={{ backgroundColor: COLORS.colorLight }}
                   >
-                    <Card
-                      variant="outlined"
-                      sx={{ backgroundColor: COLORS.colorLight }}
-                    >
-                      <Tooltip title="Click to view more" placement="top">
-                        <CardActionArea
-                          component={Link}
-                          to={team.name}
-                          state={{ team: team }}
-                        >
-                          <CardContent>
-                            <Avatar
-                              alt="Remy Sharp"
-                              src={team.flag}
-                              sx={{ width: 80, height: 80 }}
-                            />
-                            <Typography variant="h5" component="div">
-                              {team.name}
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Tooltip>
-                    </Card>
-                  </Box>
-                </Grid>
-              ))}
+                    <Tooltip title="Click to view more" placement="top">
+                      <CardActionArea
+                        component={Link}
+                        to={team.name}
+                        state={{ team: team }}
+                      >
+                        <CardContent>
+                          <Avatar
+                            alt="Remy Sharp"
+                            src={team.flag}
+                            sx={{ width: 80, height: 80 }}
+                          />
+                          <Typography variant="h5" component="div">
+                            {team.name}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Tooltip>
+                  </Card>
+                </Box>
+              </Grid>
+            ))
+          )}
         </Grid>
       </Box>
     </div>

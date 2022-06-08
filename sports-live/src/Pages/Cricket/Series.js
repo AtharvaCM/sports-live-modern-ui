@@ -11,10 +11,11 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Container } from "@mui/system";
 
 import SeriesListAPI from "../../API/Cricket/SeriesListAPI";
 import { StyledTableCell, StyledTableRow } from "../../Constants/Styles";
-import { Container } from "@mui/system";
+import Spinner from "../../Components/Spinner";
 
 function Row(props) {
   const { row } = props;
@@ -111,9 +112,16 @@ function Series() {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {series === null
-            ? null
-            : series.map((row, index) => <Row key={index} row={row} />)}
+          {series === null ? (
+            <StyledTableRow>
+              <StyledTableCell />
+              <StyledTableCell align="right">
+                <Spinner />
+              </StyledTableCell>
+            </StyledTableRow>
+          ) : (
+            series.map((row, index) => <Row key={index} row={row} />)
+          )}
         </TableBody>
       </Table>
     </TableContainer>
