@@ -113,42 +113,33 @@ function LiveScore() {
                 </Box>
               </Grid>
 
-              <Grid item xs={6} md={4} sx={{ my: "auto" }}>
-                <Avatar
-                  alt="Team Logo"
-                  src={match.teamInfo[0].img}
-                  sx={{ width: 100, height: 100 }}
-                />
-                <Typography variant="body1" gutterBottom>
-                  {match.teams[0]}
-                </Typography>
-              </Grid>
+                <Grid item xs={6} md={4}>
+                  <Item sx={{ mt: 3 }}>
+                    {match.teamInfo[0].shortname} :
+                    {match.score[0] === undefined
+                      ? null
+                      : `${match.score[0].r} / ${match.score[0].w} (${match.score[0].o})`}
+                    <br />
+                    {match.teamInfo[1].shortname} :
+                    {match.score[1] === undefined
+                      ? null
+                      : `${match.score[1].r} / ${match.score[1].w} (${match.score[1].o})`}
+                  </Item>
+                  <Typography variant="h6" sx={{ mt: 2 }}>
+                    {match.status}
+                  </Typography>
+                </Grid>
 
-              <Grid item xs={6} md={4}>
-                <Item sx={{ mt: 3 }}>
-                  {match.teamInfo[0].shortname} :{" "}
-                  {match.score[0] ? match.score[0].r : "NA"} /{" "}
-                  {match.score[0].w} ({match.score[0] ? match.score[0].o : "NA"}
-                  ) <br />
-                  {match.teamInfo[1].shortname} :{" "}
-                  {match.score[1] ? match.score[1].r : "NA"} /{" "}
-                  {match.score[1] ? match.score[1].w : "NA"} (
-                  {match.score[1] ? match.score[1].o : "NA"})
-                </Item>
-                <Typography variant="h6" sx={{ mt: 2 }}>
-                  {match.status}
-                </Typography>
-              </Grid>
-
-              <Grid item xs={6} md={4} sx={{ my: "auto" }}>
-                <Avatar
-                  alt="Team Logo"
-                  src={match.teamInfo[1].img}
-                  sx={{ width: 100, height: 100 }}
-                />
-                <Typography variant="body1" gutterBottom>
-                  {match.teams[1]}
-                </Typography>
+                <Grid item xs={6} md={4} sx={{ my: "auto" }}>
+                  <Avatar
+                    alt={match.teams[1]}
+                    src={match.teamInfo[1].img}
+                    sx={{ width: 100, height: 100 }}
+                  />
+                  <Typography variant="body1" gutterBottom>
+                    {match.teams[1]}
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
