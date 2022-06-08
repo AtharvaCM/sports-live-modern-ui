@@ -5,10 +5,12 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import ListSubheader from "@mui/material/ListSubheader";
 import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 
 import axios from "axios";
 
 import { COLORS } from "../../Constants/Theme";
+import Spinner from "../../Components/Spinner";
 
 const URL =
   "https://api.unsplash.com/search/photos?page=1&per_page=30&query=cricket&client_id=J-xAGd8R7QHuRsKiznwL6R-yhGK8-X64-Oj0HG1A9Q0";
@@ -62,11 +64,20 @@ function Gallery() {
 
   return (
     <>
-      {images == null ? null : (
-        <Container maxWidth sx={{ px: "0 !important" }}>
-          {imageList()}
-        </Container>
-      )}
+      <Container maxWidth sx={{ px: "0 !important" }}>
+        {images == null ? (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            minHeight="60vh"
+          >
+            <Spinner />
+          </Box>
+        ) : (
+          imageList()
+        )}
+      </Container>
     </>
   );
 }

@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 
 import PlayersListAPI from "../../../API/Cricket/PlayersListAPI";
 import { COLORS } from "../../../Constants/Theme";
+import Spinner from "../../Spinner";
 
 function TeamPlayers({ team }) {
   const [players, setPlayers] = useState(null);
@@ -34,50 +35,56 @@ function TeamPlayers({ team }) {
         align="center"
         container
       >
-        {players === null
-          ? null
-          : players.map((player, index) => (
-              <Grid item xs={12} md={3} key={index}>
-                <Box
-                  sx={{
-                    minWidth: 175,
-                    maxWidth: 250,
-                  }}
+        {players === null ? (
+          <Grid item sm={12} md={12}>
+            <Box display="flex" alignItems="center" justifyContent="center">
+              <Spinner />
+            </Box>
+          </Grid>
+        ) : (
+          players.map((player, index) => (
+            <Grid item xs={12} md={3} key={index}>
+              <Box
+                sx={{
+                  minWidth: 175,
+                  maxWidth: 250,
+                }}
+              >
+                <Card
+                  variant="outlined"
+                  sx={{ backgroundColor: COLORS.colorLight }}
                 >
-                  <Card
-                    variant="outlined"
-                    sx={{ backgroundColor: COLORS.colorLight }}
-                  >
-                    <Tooltip title="Click to view details" placement="top">
-                      <CardActionArea
-                        component={Link}
-                        to="/Cricket/Player"
-                        state={{ player: player }}
-                      >
-                        <CardContent>
-                          <Avatar
-                            alt="Remy Sharp"
-                            src={player.img_src}
-                            sx={{ width: 80, height: 80 }}
-                          />
-                          <Typography variant="h6" component="div">
-                            {player.name}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {player.role}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Tooltip>
-                  </Card>
-                </Box>
-              </Grid>
-            ))}
+                  <Tooltip title="Click to view details" placement="top">
+                    <CardActionArea
+                      component={Link}
+                      to="/Cricket/Player"
+                      state={{ player: player }}
+                    >
+                      <CardContent>
+                        <Avatar
+                          alt="Remy Sharp"
+                          src={player.img_src}
+                          sx={{ width: 80, height: 80 }}
+                        />
+                        <Typography variant="h6" component="div">
+                          {player.name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {player.role}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Tooltip>
+                </Card>
+              </Box>
+            </Grid>
+          ))
+        )}
       </Grid>
     </Box>
   );
 
-  return <>{players === null ? null : playerList()}</>;
+  return <>{playerList()}</>;
 }
 
 export default TeamPlayers;
