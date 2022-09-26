@@ -1,10 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
-import SportsImage from "../Assets/Images/sports-tools1.jpg";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import HomePageItems from "./HomePageItems";
-import { Collapse } from "@mui/material";
-import Spinner from "../Components/Spinner";
 
+// MUI
+import Collapse from "@mui/material/Collapse";
+
+// MUI icons
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
+// Assets
+import SportsImage from "../Assets/Images/sports-tools1.jpg";
+
+// Custom components
+import HomePageItems from "./HomePageItems";
+import Spinner from "../Components/Spinner";
 
 function HomePage() {
   const [checked, setChecked] = useState(false);

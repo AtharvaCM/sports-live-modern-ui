@@ -1,13 +1,24 @@
 import React from "react";
-import cricketImg from "../Assets/Images/Cricket/cricInfoPage.jpg";
-import footballImg from "../Assets/Images/Football/footballCover1.jpg";
-import { Link } from "react-router-dom";
 
+// MUI
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box, CardActionArea, Grid, Tooltip } from "@mui/material";
+import Box from "@mui/material/Box";
+import CardActionArea from "@mui/material/CardActionArea";
+import Grid from "@mui/material/Grid";
+import Tooltip from "@mui/material/Tooltip";
+
+// react router
+import { Link } from "react-router-dom";
+
+// Assets
+import cricketImg from "../Assets/Images/Cricket/cricInfoPage.jpg";
+import footballImg from "../Assets/Images/Football/footballCover1.jpg";
+
+// path constants
+import { ROUTES } from "../Constants/routingPathConstants";
 
 function HomePageItems() {
   return (
@@ -28,12 +39,10 @@ function HomePageItems() {
         >
           <Grid item xs={6} md={6}>
             <Tooltip title="Go to Cricket Section" placement="top">
-              <Card
-                sx={STYLE.card}
-              >
+              <Card sx={STYLE.card}>
                 <CardActionArea
                   component={Link}
-                  to="/Cricket"
+                  to={ROUTES.CRICKET}
                   sx={STYLE.cardActionArea}
                 >
                   <div className="news-card">
@@ -49,7 +58,11 @@ function HomePageItems() {
                     <Typography gutterBottom variant="h4" component="div">
                       Cricket
                     </Typography>
-                    <Typography variant="body2" color="#ddd" sx={{ textAlign: 'justify' }}>
+                    <Typography
+                      variant="body2"
+                      color="#ddd"
+                      sx={{ textAlign: "justify" }}
+                    >
                       Cricket is a team sport that is played outdoors. Cricket
                       originated in England and gradually became popular across
                       the globe. This sport requires complete physical fitness
@@ -63,12 +76,10 @@ function HomePageItems() {
           </Grid>
           <Grid item xs={6} md={6}>
             <Tooltip title="Go to Football Section" placement="top">
-              <Card
-                sx={STYLE.card}
-              >
+              <Card sx={STYLE.card}>
                 <CardActionArea
                   component={Link}
-                  to="/Football"
+                  to={ROUTES.FOOTBALL}
                   sx={{ cursor: "pointer", textDecoration: "none" }}
                 >
                   <div className="news-card">
@@ -84,7 +95,11 @@ function HomePageItems() {
                     <Typography gutterBottom variant="h4" component="div">
                       Football
                     </Typography>
-                    <Typography variant="body2" color="#ddd" sx={{ textAlign: 'justify' }}>
+                    <Typography
+                      variant="body2"
+                      color="#ddd"
+                      sx={{ textAlign: "justify" }}
+                    >
                       Football is the most popular sport worldwide. It is also
                       called “soccer” in some countries. It is an outdoor game
                       that requires absolute athleticism as players have to
@@ -111,8 +126,9 @@ const STYLE = {
     color: "white",
   },
   cardActionArea: {
-    cursor: "pointer", textDecoration: "none"
+    cursor: "pointer",
+    textDecoration: "none",
   },
-}
+};
 
 export default HomePageItems;

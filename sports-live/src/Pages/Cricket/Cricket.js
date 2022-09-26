@@ -1,11 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
-import { Container } from "react-bootstrap";
+
+// react router
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
+// react bootstrap
+import Container from "react-bootstrap/Container";
+
+// MUI
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -13,14 +18,19 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import { CardActionArea } from "@mui/material";
+import CardActionArea from "@mui/material/CardActionArea";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { styled } from "@mui/material/styles";
 
+// Components
 import CricketSubNavbar from "../../Components/Cricket/CricketSubNavbar";
 import Spinner from "../../Components/Spinner";
-import { COLORS } from "../../Constants/themeConstants";
+
 import NewsAPI from "../../API/Cricket/NewsAPI";
 import CurrentMatchesAPI from "../../API/Cricket/CurrentMatchesAPI";
+
+// Constants
+import { COLORS } from "../../Constants/themeConstants";
 
 const verticalAlignStyle = {
   display: "flex",

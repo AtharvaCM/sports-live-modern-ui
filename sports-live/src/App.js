@@ -7,7 +7,10 @@ import "@fontsource/roboto/700.css";
 
 import { React, useState, useEffect } from "react";
 
+// react router
 import { Outlet, useLocation } from "react-router-dom";
+
+// Custom components
 import HomePage from "./Pages/HomePage";
 import Navbar from "./Components/Navbar";
 
@@ -18,6 +21,7 @@ function App() {
   useEffect(() => {
     location.pathname === "/" ? setdisplay(true) : setdisplay(false);
   }, [location]);
+
   return (
     <>
       <Navbar></Navbar>
