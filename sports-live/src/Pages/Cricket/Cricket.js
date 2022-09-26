@@ -61,6 +61,7 @@ function Cricket() {
     // Call the FeaturedMatches API
     CurrentMatchesAPI()
       .then((response) => {
+        console.log("response.data: ", response.data);
         setFeaturedMatches(response.data);
       })
       .catch((err) => console.log(err));
@@ -172,9 +173,9 @@ function Cricket() {
                   {featuredMatches[0].score[0].w} (
                   {featuredMatches[0].score[0].o}) <br />
                   {featuredMatches[0].teams[1]} :{" "}
-                  {featuredMatches[0].score[1].r} /{" "}
-                  {featuredMatches[0].score[1].w} (
-                  {featuredMatches[0].score[1].o})
+                  {featuredMatches[0].score[1] === undefined
+                    ? "NA"
+                    : `${featuredMatches[0].score[1].r} / ${featuredMatches[0].score[1].w} (${featuredMatches[0].score[1].o})`}
                 </Item>
                 <Typography variant="h5" style={{ marginTop: "5px" }}>
                   {featuredMatches[0].status}
