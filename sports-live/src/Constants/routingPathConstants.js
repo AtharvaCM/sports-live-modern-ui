@@ -1,0 +1,16 @@
+export const ROUTES = {
+  APP: "/",
+  HOME: "home",
+  CRICKET: "cricket",
+  FOOTBALL: "football",
+  LIVESCORE: "livescore",
+  RANKINGS: "rankings",
+  SERIES: "series",
+  GALLERY: "gallery",
+  NEWS: "news",
+  TEAMS: "teams",
+  NAME_SLUG: ":name",
+  PLAYER: "player",
+  MATCH_SUMMARY: "match-summary",
+  TEAM_INFO: "team-info",
+};

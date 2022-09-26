@@ -10,7 +10,7 @@ import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 
 import CurrentMatchesAPI from "../../API/Cricket/CurrentMatchesAPI";
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: COLORS.colorDark,

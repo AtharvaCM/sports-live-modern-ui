@@ -19,7 +19,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { CardActionArea } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 import footballNewsApi from "../../API/Football/FootballNewsApi";
 import FootballLiveScoreApi from "../../API/Football/FootballLiveScoreApi";
 import Spinner from "../../Components/Spinner";

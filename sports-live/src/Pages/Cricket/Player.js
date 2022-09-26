@@ -18,8 +18,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import { StyledTableRow, StyledTableCell } from "../../Constants/Styles";
-import { COLORS } from "../../Constants/Theme";
+import {
+  StyledTableRow,
+  StyledTableCell,
+} from "../../Constants/MUITableStyleConstants";
+import { COLORS } from "../../Constants/themeConstants";
 
 function Player() {
   const location = useLocation();

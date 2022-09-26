@@ -8,7 +8,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Avatar, Typography } from "@mui/material";
 
-import { StyledTableCell, StyledTableRow } from "../../../Constants/Styles";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../../Constants/MUITableStyleConstants";
 
 function BattingRankings({ rows, matchType }) {
   //   console.log("rows", rows);

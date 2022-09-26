@@ -13,7 +13,10 @@ import Avatar from "@mui/material/Avatar";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 import LeagueListApi from "../../API/Football/LeagueListApi";
-import { StyledTableCell, StyledTableRow } from "../../Constants/Styles";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../Constants/MUITableStyleConstants";
 import Spinner from "../../Components/Spinner";
 
 const LeagueList = (league) => (

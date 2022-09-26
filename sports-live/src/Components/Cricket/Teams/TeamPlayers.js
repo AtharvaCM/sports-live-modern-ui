@@ -12,7 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
 
 import PlayersListAPI from "../../../API/Cricket/PlayersListAPI";
-import { COLORS } from "../../../Constants/Theme";
+import { COLORS } from "../../../Constants/themeConstants";
 import Spinner from "../../Spinner";
 
 function TeamPlayers({ team }) {

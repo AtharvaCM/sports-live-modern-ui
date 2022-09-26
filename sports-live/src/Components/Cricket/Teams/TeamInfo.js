@@ -14,7 +14,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TeamSchedule from "./TeamSchedule";
 import TeamPlayers from "./TeamPlayers";
 import TeamStats from "./TeamStats";
-import { COLORS } from "../../../Constants/Theme";
+import { COLORS } from "../../../Constants/themeConstants";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

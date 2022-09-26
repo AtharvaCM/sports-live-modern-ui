@@ -14,7 +14,10 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Container } from "@mui/system";
 
 import SeriesListAPI from "../../API/Cricket/SeriesListAPI";
-import { StyledTableCell, StyledTableRow } from "../../Constants/Styles";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../Constants/MUITableStyleConstants";
 import Spinner from "../../Components/Spinner";
 
 function Row(props) {

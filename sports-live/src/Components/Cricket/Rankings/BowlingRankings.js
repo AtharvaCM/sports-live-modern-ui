@@ -7,7 +7,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-import { StyledTableCell, StyledTableRow } from "../../../Constants/Styles";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../../Constants/MUITableStyleConstants";
 import { Avatar, Typography } from "@mui/material";
 
 function BowlingRankings({ rows, matchType }) {

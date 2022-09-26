@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 
 import axios from "axios";
 
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 import Spinner from "../../Components/Spinner";
 
 const URL =

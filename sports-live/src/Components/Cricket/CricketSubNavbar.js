@@ -20,7 +20,7 @@ import ListItemText from "@mui/material/ListItemText";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 import PlayersListAPI from "../../API/Cricket/PlayersListAPI";
 import { Avatar } from "@mui/material";
 

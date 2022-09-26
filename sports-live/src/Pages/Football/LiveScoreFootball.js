@@ -14,7 +14,7 @@ import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 
 import LiveScoreFootballApi from "../../API/Football/FootballLiveScoreApi";
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 import Spinner from "../../Components/Spinner";
 
 const Item = styled(Paper)(({ theme }) => ({

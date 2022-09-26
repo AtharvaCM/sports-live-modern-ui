@@ -13,7 +13,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LeagueSchedule from "./LeagueSchedule";
 import LeagueTeams from "./LeagueTeams";
 import LeaguePointsTable from "./LeaguePointsTable";
-import { COLORS } from "../../../Constants/Theme";
+import { COLORS } from "../../../Constants/themeConstants";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

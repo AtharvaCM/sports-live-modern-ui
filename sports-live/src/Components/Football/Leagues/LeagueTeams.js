@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 
-import { COLORS } from "../../../Constants/Theme";
+import { COLORS } from "../../../Constants/themeConstants";
 import Spinner from "../../Spinner";
 
 function LeagueTeams({ league }) {

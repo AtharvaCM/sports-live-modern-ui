@@ -8,7 +8,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 
-import { StyledTableCell, StyledTableRow } from "../../../../Constants/Styles";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../../../Constants/MUITableStyleConstants";
 import { DoughnutChart, LineChart } from "../../../Chart";
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from "chart.js/auto";

@@ -9,7 +9,7 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
-import { COLORS } from "../../../Constants/Theme";
+import { COLORS } from "../../../Constants/themeConstants";
 
 export function Timeline({ events }) {
   console.log(events);

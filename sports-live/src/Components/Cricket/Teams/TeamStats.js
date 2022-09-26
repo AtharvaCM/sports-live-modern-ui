@@ -7,7 +7,7 @@ import {
   TeamStatsTotalMatchesAPI,
   TeamStatsWinPercentageByYearAPI,
 } from "../../../API/Cricket/TeamStatsAPI";
-import { COLORS } from "../../../Constants/Theme";
+import { COLORS } from "../../../Constants/themeConstants";
 import TestStats from "./Stats/TestStats";
 import ODIStats from "./Stats/ODIStats";
 import T20Stats from "./Stats/T20Stats";

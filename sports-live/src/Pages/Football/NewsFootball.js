@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 import FootballNewsApi from "../../API/Football/FootballNewsApi";
 import Spinner from "../../Components/Spinner";
 

@@ -8,7 +8,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import LeagueWiseScheduleApi from "../../../API/Football/LeagueWiseScheduleApi";
-import { StyledTableRow, StyledTableCell } from "../../../Constants/Styles";
+import {
+  StyledTableRow,
+  StyledTableCell,
+} from "../../../Constants/MUITableStyleConstants";
 import Spinner from "../../Spinner";
 
 function LeagueSchedule({ league }) {

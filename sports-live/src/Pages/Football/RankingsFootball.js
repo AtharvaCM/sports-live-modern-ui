@@ -11,7 +11,10 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 
 import FootballRankingApi from "../../API/Football/FootballRankingApi";
-import { StyledTableCell, StyledTableRow } from "../../Constants/Styles";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../Constants/MUITableStyleConstants";
 
 const FifaRankingTable = () => (
   <TableContainer component={Paper}>

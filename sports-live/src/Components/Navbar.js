@@ -13,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { Link, useLocation } from "react-router-dom";
 
-import { COLORS } from "../Constants/Theme";
+import { COLORS } from "../Constants/themeConstants";
 
 const pages = ["Home", "Cricket", "Football"];
 

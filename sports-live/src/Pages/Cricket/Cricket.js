@@ -18,7 +18,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import CricketSubNavbar from "../../Components/Cricket/CricketSubNavbar";
 import Spinner from "../../Components/Spinner";
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 import NewsAPI from "../../API/Cricket/NewsAPI";
 import CurrentMatchesAPI from "../../API/Cricket/CurrentMatchesAPI";
 

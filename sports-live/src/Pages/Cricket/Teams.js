@@ -17,7 +17,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
 
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 import TeamsListAPI from "../../API/Cricket/TeamsListAPI";
 import Spinner from "../../Components/Spinner";
 

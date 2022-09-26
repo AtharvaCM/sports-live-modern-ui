@@ -14,7 +14,7 @@ import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import { COLORS } from "../../Constants/Theme";
+import { COLORS } from "../../Constants/themeConstants";
 import { Timeline } from "../../Components/Football/Match/Timeline";
 import { BarChart, StackedBarChart, PieChart } from "../../Components/Chart";
 import { MatchStatsAPI } from "../../API/Football/MatchStatsAPI";
