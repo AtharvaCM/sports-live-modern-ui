@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
-import Avatar from "@mui/material/Avatar";
 import { Container } from "react-bootstrap";
+import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";

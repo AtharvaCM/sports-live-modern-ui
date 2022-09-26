@@ -5,24 +5,6 @@ import HomePageItems from "./HomePageItems";
 import { Collapse } from "@mui/material";
 import Spinner from "../Components/Spinner";
 
-const STYLE = {
-  divStyle: {
-    marginTop: "-32px",
-    backgroundImage: `url(${SportsImage})`,
-    backgroundRepeat: "no-repeat",
-    minheight: "100vh",
-    backgroundSize: "cover",
-  },
-  h1Style: {
-    display: "flex",
-    justifyContent: "center",
-    color: "white",
-    textAlign: "center",
-    fontSize: "3rem",
-    height: "50vh",
-    alignItems: "center",
-  },
-};
 
 function HomePage() {
   const [checked, setChecked] = useState(false);
@@ -60,13 +42,7 @@ function HomePage() {
 
       <div style={{ textAlign: "center", marginBottom: "50px" }} id="Header">
         <KeyboardArrowDownIcon
-          sx={{
-            color: "white",
-            fontSize: "60",
-            height: "4rem",
-            width: "4rem",
-            textAlign: "center",
-          }}
+          sx={STYLE.keyboardArrowDownIcon}
           onClick={handleDownArrowClick}
           className="btn-scroll"
         />
@@ -80,5 +56,31 @@ function HomePage() {
 
   return <>{loading === true ? showSpinner() : homePageContent()}</>;
 }
+
+const STYLE = {
+  divStyle: {
+    marginTop: "-32px",
+    backgroundImage: `url(${SportsImage})`,
+    backgroundRepeat: "no-repeat",
+    minheight: "100vh",
+    backgroundSize: "cover",
+  },
+  h1Style: {
+    display: "flex",
+    justifyContent: "center",
+    color: "white",
+    textAlign: "center",
+    fontSize: "3rem",
+    height: "50vh",
+    alignItems: "center",
+  },
+  keyboardArrowDownIcon: {
+    color: "white",
+    fontSize: "60",
+    height: "4rem",
+    width: "4rem",
+    textAlign: "center",
+  },
+};
 
 export default HomePage;

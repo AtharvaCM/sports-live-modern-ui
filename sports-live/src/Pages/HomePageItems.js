@@ -29,17 +29,12 @@ function HomePageItems() {
           <Grid item xs={6} md={6}>
             <Tooltip title="Go to Cricket Section" placement="top">
               <Card
-                sx={{
-                  maxWidth: 400,
-                  height: 500,
-                  background: "rgb(0,0,0,0.8)",
-                  color: "white",
-                }}
+                sx={STYLE.card}
               >
                 <CardActionArea
                   component={Link}
                   to="/Cricket"
-                  sx={{ cursor: "pointer", textDecoration: "none" }}
+                  sx={STYLE.cardActionArea}
                 >
                   <div className="news-card">
                     <CardMedia
@@ -54,7 +49,7 @@ function HomePageItems() {
                     <Typography gutterBottom variant="h4" component="div">
                       Cricket
                     </Typography>
-                    <Typography variant="body2" color="#ddd" sx={{textAlign:'justify'}}>
+                    <Typography variant="body2" color="#ddd" sx={{ textAlign: 'justify' }}>
                       Cricket is a team sport that is played outdoors. Cricket
                       originated in England and gradually became popular across
                       the globe. This sport requires complete physical fitness
@@ -69,12 +64,7 @@ function HomePageItems() {
           <Grid item xs={6} md={6}>
             <Tooltip title="Go to Football Section" placement="top">
               <Card
-                sx={{
-                  maxWidth: 400,
-                  height: 500,
-                  background: "rgb(0,0,0,0.8)",
-                  color: "white",
-                }}
+                sx={STYLE.card}
               >
                 <CardActionArea
                   component={Link}
@@ -94,7 +84,7 @@ function HomePageItems() {
                     <Typography gutterBottom variant="h4" component="div">
                       Football
                     </Typography>
-                    <Typography variant="body2" color="#ddd" sx={{textAlign:'justify'}}>
+                    <Typography variant="body2" color="#ddd" sx={{ textAlign: 'justify' }}>
                       Football is the most popular sport worldwide. It is also
                       called “soccer” in some countries. It is an outdoor game
                       that requires absolute athleticism as players have to
@@ -111,6 +101,18 @@ function HomePageItems() {
       </Box>
     </div>
   );
+}
+
+const STYLE = {
+  card: {
+    maxWidth: 400,
+    height: 500,
+    background: "rgb(0,0,0,0.8)",
+    color: "white",
+  },
+  cardActionArea: {
+    cursor: "pointer", textDecoration: "none"
+  },
 }
 
 export default HomePageItems;
